@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/route/routes_generator.dart';
 
-
-
 void main() {
   runApp(
        const MyApp(),
   );
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
