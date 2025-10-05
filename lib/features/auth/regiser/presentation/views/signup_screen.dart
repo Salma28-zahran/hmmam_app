@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
+import 'package:hmmam_app/core/route/routes.dart';
 import 'package:hmmam_app/features/auth/regiser/presentation/widgets/TermsAgreement.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
 
@@ -220,6 +221,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     ),
                     onPressed: isFormValid
                         ? () {
+                      Navigator.pushNamed(context, PageRouteName.active);
                     }
                         : null,
                     child: const Text(

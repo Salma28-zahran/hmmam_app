@@ -121,6 +121,10 @@ class AppColor {
   static TextStyle textblack =GoogleFonts.inter(
       fontSize: 16, color: AppColor.black, fontWeight: FontWeight.w600);
 
+  static TextStyle textprimary =GoogleFonts.inter(
+      fontSize: 12, color: AppColor.primary, fontWeight: FontWeight.w400);
+
+
 
 
 
