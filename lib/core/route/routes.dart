@@ -6,6 +6,8 @@ class PageRouteName{
   static const String forget = '/forget';
   static const String check = '/check';
   static const String reset = '/reset';
+  static const String onboarding = '/onboarding';
+
 
 
 
