@@ -7,6 +7,7 @@ import 'package:hmmam_app/features/auth/login/presentation/views/login_screen.da
 import 'package:hmmam_app/features/auth/regiser/presentation/views/activate_screen.dart';
 import 'package:hmmam_app/features/auth/regiser/presentation/views/signup_screen.dart';
 import 'package:hmmam_app/features/home/presentation/views/home_screen.dart';
+import 'package:hmmam_app/features/onboarding/OnBoarding.dart';
 
 class RoutesGenerator {
   static Route<dynamic> onGenerateRoutes(RouteSettings settings) {
@@ -51,7 +52,7 @@ class RoutesGenerator {
 
       default:
         return MaterialPageRoute(
-          builder: (context) => const SignupScreen(),
+          builder: (context) => OnBoarding(),
           settings: settings,
         );
     }
