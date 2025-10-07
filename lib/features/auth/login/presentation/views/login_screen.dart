@@ -202,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   onPressed: isFormValid
                       ? () {
-                    Navigator.pushNamed(context, PageRouteName.home);
+                    Navigator.pushNamed(context, PageRouteName.main);
                   }
                       : null,
                   child: const Text(
