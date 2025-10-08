@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 16),
 
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 8),
               child: RichText(
                 text: TextSpan(
                   children: [

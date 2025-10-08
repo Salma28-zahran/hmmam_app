@@ -28,6 +28,8 @@ class AppColor {
 
   static const Color grey = Color(0xff666666);
   static const Color grey2 = Color.fromARGB(255, 66, 66, 66);
+  static const Color grey3 = Color(0xffdcd4d4);
+
   static const Color greylite200 = Color(0xFFEEEEEE);
   static const Color black = Color(0xff000000);
   static const Color white = Color(0xffF8F9FD);
@@ -41,6 +43,11 @@ class AppColor {
   static const Color pink2 = Color(0xffEC4899);
   static const Color orange = Color(0xffFFF1E6);
   static const Color orange2 = Color(0xffFF9B4D);
+  static const Color yellow = Color(0xffFFC154);
+  static const Color green = Color(0xff3DC26F);
+
+
+
 
 
 
@@ -123,6 +130,9 @@ class AppColor {
 
   static TextStyle textprimary =GoogleFonts.inter(
       fontSize: 12, color: AppColor.primary, fontWeight: FontWeight.w400);
+
+  static TextStyle textwhite =GoogleFonts.plusJakartaSans(
+      fontSize: 16, color: AppColor.white, fontWeight: FontWeight.w800);
 
 
 

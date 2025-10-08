@@ -10,6 +10,18 @@ abstract class AssetsManager {
   static const String notification = "assets/images/png/notification.png";
   static const String cycle = "assets/images/png/cycle.png";
   static const String cycle2 = "assets/images/png/cycle2.png";
+  static const String power = "assets/images/png/power.png";
+  static const String electric = "assets/images/png/electric.png";
+  static const String cart = "assets/images/png/cart.png";
+  static const String lamp = "assets/images/png/lamp.png";
+  static const String none = "assets/images/png/none.png";
+  static const String person = "assets/images/png/person.png";
+
+
+
+
+
+
 
 
 
