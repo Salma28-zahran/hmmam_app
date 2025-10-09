@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hmmam_app/features/home/presentation/views/ElectricTabContent.dart';
+import 'package:hmmam_app/features/home/presentation/views/NonElectricTabContent.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
 
 class WheelchairTypeWidget extends StatefulWidget {
@@ -93,22 +95,11 @@ class _WheelchairTypeWidgetState extends State<WheelchairTypeWidget> {
   }
 
   Widget _buildElectricBody() {
-    return Container(
-      key: const ValueKey('electric'),
-      child: const Text(
-        '⚡ Electric Wheelchairs List',
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      ),
-    );
+    return Electrictabcontent(batteryLevel: 50);
   }
 
+
   Widget _buildNonElectricBody() {
-    return Container(
-      key: const ValueKey('non-electric'),
-      child: const Text(
-        '🧑‍🦽 Manual Wheelchairs List',
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-      ),
-    );
+    return Nonelectrictabcontent();
   }
 }
