@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hmmam_app/core/route/routes.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
 
 class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -62,7 +63,10 @@ class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   const SizedBox(height: 40),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, PageRouteName.signup);
+
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xff074F5F),
                       minimumSize: const Size(double.infinity, 50),
@@ -77,7 +81,9 @@ class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   const SizedBox(height: 12),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, PageRouteName.login);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.white,
                       minimumSize: const Size(double.infinity, 50),
