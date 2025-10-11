@@ -16,6 +16,8 @@ abstract class AssetsManager {
   static const String lamp = "assets/images/png/lamp.png";
   static const String none = "assets/images/png/none.png";
   static const String person = "assets/images/png/person.png";
+  static const String saved = "assets/images/png/saved.png";
+
 
 
 

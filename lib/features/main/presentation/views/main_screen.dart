@@ -30,13 +30,17 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _selectedIndex == 3 ? null : const CustomAppBar(),
+      appBar: (_selectedIndex == 2 || _selectedIndex == 3)
+          ? null
+          : const CustomAppBar(),
       body: _screens[_selectedIndex],
-      bottomNavigationBar: BottomNavBar(
+
+      bottomNavigationBar: _selectedIndex == 2
+          ? null
+          : BottomNavBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
     );
   }
-
 }
