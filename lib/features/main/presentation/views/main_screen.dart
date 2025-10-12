@@ -16,7 +16,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  final List<Widget> _screens = const [
+  final List<Widget> _screens = [
     HomeScreen(),
     OrdersScreen(),
     SavedScreen(),
@@ -29,13 +29,18 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final bool hideBars = _selectedIndex == 1;
+
     return Scaffold(
-      appBar: (_selectedIndex == 2 || _selectedIndex == 3)
+      appBar: hideBars
+          ? null
+          : (_selectedIndex == 2 || _selectedIndex == 3)
           ? null
           : const CustomAppBar(),
       body: _screens[_selectedIndex],
-
-      bottomNavigationBar: _selectedIndex == 2
+      bottomNavigationBar: hideBars
+          ? null
+          : _selectedIndex == 2
           ? null
           : BottomNavBar(
         currentIndex: _selectedIndex,

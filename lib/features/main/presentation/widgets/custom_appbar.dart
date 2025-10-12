@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
@@ -31,8 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
                     fixedSize: const Size(100, 32),
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -40,22 +40,42 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, PageRouteName.login);
                   },
-                  child: const Text(
-                    'Login now',
-                    style: TextStyle(
+                  child: Text(
+                    'login'.tr(),
+                    style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 const Spacer(),
+                const SizedBox(width: 10),
+                IconButton(
+                  icon: Text(
+                    context.locale.languageCode == 'en' ? 'AR' : 'EN',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black,
+                    ),
+                  ),
+                  onPressed: () {
+                    if (context.locale.languageCode == 'en') {
+                      context.setLocale(const Locale('ar'));
+                    } else {
+                      context.setLocale(const Locale('en'));
+                    }
+                  },
+                ),
                 Image.asset(
                   AssetsManager.notification,
                   width: 30,
                   height: 37,
                 ),
+
               ],
             ),
+
             const SizedBox(height: 25),
             Row(
               children: [
@@ -79,7 +99,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Search for wheelchair for you',
+                              hintText: 'search_for_wheelchair_for_you'.tr(),
                               hintStyle: TextStyle(
                                 color: AppColor.grey,
                                 fontSize: 15,

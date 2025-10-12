@@ -17,37 +17,9 @@ abstract class AssetsManager {
   static const String none = "assets/images/png/none.png";
   static const String person = "assets/images/png/person.png";
   static const String saved = "assets/images/png/saved.png";
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  static const String welcoming = "assets/images/png/welcoming.png";
+  static const String street = "assets/images/png/street.png";
+  static const String blue = "assets/images/png/blue.png";
 
 
 

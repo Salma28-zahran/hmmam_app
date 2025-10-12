@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
+import 'package:hmmam_app/features/home/presentation/widgets/SelectableTagsRow.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'dart:ui' as ui;
 
 class Nonelectrictabcontent extends StatelessWidget {
   const Nonelectrictabcontent({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final bool isArabic = context.locale.languageCode == 'ar';
+
     return Padding(
-      padding: const EdgeInsets.only(top: 5, left: 15, right: 3),
+      padding: const EdgeInsetsDirectional.only(top: 5, start: 15, end: 3),
       child: Stack(
         children: [
           Column(
@@ -27,7 +31,8 @@ class Nonelectrictabcontent extends StatelessWidget {
                           color: AppColor.yellow,
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child: Icon(Icons.person_rounded, color: AppColor.white),
+                        child: const Icon(Icons.person_rounded,
+                            color: AppColor.white),
                       ),
                       const SizedBox(height: 8),
                       Container(
@@ -47,219 +52,279 @@ class Nonelectrictabcontent extends StatelessWidget {
                           color: AppColor.green,
                           borderRadius: BorderRadius.circular(6),
                         ),
-                        child:
-                        Icon(Icons.location_on_sharp, color: AppColor.white),
+                        child: const Icon(Icons.location_on_sharp,
+                            color: AppColor.white),
                       ),
                     ],
                   ),
                   Expanded(
-                    child: Transform.translate(
-                      offset: const Offset(-45, -7),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
                       child: Image.asset(AssetsManager.none),
                     ),
                   ),
                 ],
               ),
-      Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12.withOpacity(0.05),
-              blurRadius: 6,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        child:
-        Row(
-          children: [
-            Icon(Icons.location_on_outlined, color: AppColor.primary, size: 20),
-            const SizedBox(width: 8),
-            const Text(
-              'Location',
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                color: AppColor.primary,
-                fontSize: 13,
-              ),
-            ),
 
-            Container(
-              height: 20,
-              width: 1,
-              color: Colors.grey.withOpacity(0.4),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-            ),
-
-            const Text(
-              'Terminal 3 - Gate A',
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.black87,
-              ),
-            ),
-          ],
-        ),
-
-      ),
-
-      const SizedBox(height: 8),
-
-      // 🗓️ Date + Time
-      Row(
-        children: [
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12.withOpacity(0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child:Row(
-                children: [
-                  Icon(Icons.calendar_today_outlined,
-                      color: AppColor.primary, size: 18),
-                  const SizedBox(width: 8),
-                  const Text(
-                    'Date',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
+              // 📍 Location
+              _directionalTextContainer(
+                isArabic,
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on_outlined,
                       color: AppColor.primary,
-                      fontSize: 13,
+                      size: 20,
                     ),
-                  ),
+                    const SizedBox(width: 8),
 
-                  Container(
-                    height: 20,
-                    width: 1,
-                    color: Colors.grey.withOpacity(0.4),
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                  ),
-
-                  const Text(
-                    'Aug 8, 2022',
-                    style: TextStyle(fontSize: 13, color: Colors.black87),
-                  ),
-                ],
-              ),
-
-            ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12.withOpacity(0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              child:
-              Row(
-                children: [
-                  // ⏰ Time label
-                  Row(
-                    children: [
-                      Icon(Icons.access_time_outlined,
-                          color: AppColor.primary, size: 18),
-                      const SizedBox(width: 8),
-                      const Text(
-                        'Time',
-                        style: TextStyle(
+                    /// TextField الأول (hint بدل 'location'.tr())
+                    SizedBox(
+                      width: 90, // ممكن تزوديه أو تقلليه حسب التصميم
+                      child: TextField(
+                        decoration: InputDecoration(
+                          isDense: true,
+                          hintText: 'location'.tr(),
+                          hintStyle: const TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: AppColor.primary,
+                            fontSize: 13,
+                          ),
+                          border: InputBorder.none,
+                        ),
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           color: AppColor.primary,
                           fontSize: 13,
                         ),
                       ),
-                    ],
+                    ),
+
+                    Container(
+                      height: 20,
+                      width: 1,
+                      color: Colors.grey.withOpacity(0.4),
+                      margin: const EdgeInsets.symmetric(horizontal: 10),
+                    ),
+
+                    /// TextField الثاني (hint بدل 'terminal_gate'.tr())
+                    SizedBox(
+                      width: 110,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          isDense: true,
+                          hintText: 'terminal_gate'.tr(),
+                          hintStyle: const TextStyle(
+                            fontSize: 13,
+                            color: Colors.black54,
+                          ),
+                          border: InputBorder.none,
+                        ),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+              ),
+
+              const SizedBox(height: 8),
+
+              // 🗓️ Date + Time
+              Row(
+                children: [
+                  /// العمود الأول (التاريخ)
+                  Expanded(
+                    child: _directionalTextContainer(
+                      isArabic,
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.calendar_today_outlined,
+                              color: AppColor.primary,
+                              size: 18,
+                            ),
+                            const SizedBox(width: 8),
+
+                            /// TextField الأول (hint بدل 'date'.tr())
+                            SizedBox(
+                              width: 80,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  hintText: 'date'.tr(),
+                                  hintStyle: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColor.primary,
+                                    fontSize: 18,
+                                  ),
+                                  border: InputBorder.none,
+                                ),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.primary,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+
+                            Container(
+                              height: 20,
+                              width: 1,
+                              color: Colors.grey.withOpacity(0.4),
+                              margin:
+                              const EdgeInsets.symmetric(horizontal: 10),
+                            ),
+
+                            /// TextField الثاني (hint بدل 'sample_date'.tr())
+                            SizedBox(
+                              width: 100,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  hintText: 'sample_date'.tr(),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.black54,
+                                  ),
+                                  border: InputBorder.none,
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
 
-                  Container(
-                    height: 20,
-                    width: 1,
-                    color: Colors.grey.withOpacity(0.4),
-                    margin: const EdgeInsets.symmetric(horizontal: 10),
-                  ),
+                  const SizedBox(width: 10),
 
-                  const Text(
-                    '08:00 am',
-                    style: TextStyle(fontSize: 13, color: Colors.black87),
+                  /// العمود الثاني (الوقت)
+                  Expanded(
+                    child: _directionalTextContainer(
+                      isArabic,
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(
+                              Icons.access_time_outlined,
+                              color: AppColor.primary,
+                              size: 18,
+                            ),
+                            const SizedBox(width: 8),
+
+                            /// TextField الأول (hint بدل 'time'.tr())
+                            SizedBox(
+                              width: 80,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  hintText: 'time'.tr(),
+                                  hintStyle: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColor.primary,
+                                    fontSize: 18,
+                                  ),
+                                  border: InputBorder.none,
+                                ),
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  color: AppColor.primary,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+
+                            Container(
+                              height: 20,
+                              width: 1,
+                              color: Colors.grey.withOpacity(0.4),
+                              margin:
+                              const EdgeInsets.symmetric(horizontal: 10),
+                            ),
+
+                            /// TextField الثاني (hint بدل 'sample_time'.tr())
+                            SizedBox(
+                              width: 100,
+                              child: TextField(
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  hintText: 'sample_time'.tr(),
+                                  hintStyle: const TextStyle(
+                                    fontSize: 13,
+                                    color: Colors.black54,
+                                  ),
+                                  border: InputBorder.none,
+                                ),
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
 
-            ),
+
+
+              const SizedBox(height: 8),
+
+              // 🏷️ Tags
+              const SelectableTagsRow(),
+
+
+              const SizedBox(height: 10),
+
+              // 🔘 Power Off button
+              SizedBox(
+                width: double.infinity,
+                height: 46,
+                child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColor.primary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                  onPressed: () {},
+                  icon: const Icon(Icons.power_settings_new,
+                      color: Colors.white, size: 20),
+                  label: Text(
+                    'power_off'.tr(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
 
-      const SizedBox(height: 8),
-
-      // 🏷️ Tags
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _buildTag('Self-push', Colors.white, Colors.black87),
-          _buildTag('Fordable', AppColor.primary, Colors.black),
-          _buildTag('wide seat', AppColor.primary, Colors.black),
-        ],
-      ),
-
-      const SizedBox(height: 10),
-
-      // 🔘 Power Off button
-      SizedBox(
-        width: double.infinity,
-        height: 46,
-        child: ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColor.primary,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25),
-            ),
-          ),
-          onPressed: () {},
-          icon: const Icon(Icons.power_settings_new,
-              color: Colors.white, size: 20),
-          label: const Text(
-            'Power Off',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: 15,
-            ),
-          ),
-        ),
-      ),
-      ],
-
-
-
-
-
-
-
-          ),
-          Positioned(
-            right: 1,
-            top: 1,
-            child:Container(
+          // 👤 Assistant info card
+          Align(
+            alignment: isArabic ? Alignment.topLeft : Alignment.topRight,
+            child: Container(
               width: 140,
               height: 290,
               decoration: BoxDecoration(
@@ -278,28 +343,29 @@ class Nonelectrictabcontent extends StatelessWidget {
                   children: [
                     Container(
                       height: 120,
-                      width: 160,
+                      width: double.infinity,
                       color: AppColor.primary,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           const CircleAvatar(
                             radius: 26,
-                            backgroundImage: AssetImage(AssetsManager.person),
+                            backgroundImage:
+                            AssetImage(AssetsManager.person),
                           ),
                           const SizedBox(height: 8),
-                          const Text(
-                            'Ahmed',
-                            style: TextStyle(
+                          Text(
+                            'assistant_name'.tr(),
+                            style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                             ),
                           ),
                           const SizedBox(height: 2),
-                          const Text(
-                            'Mobility Assistance',
-                            style: TextStyle(
+                          Text(
+                            'assistant_title'.tr(),
+                            style: const TextStyle(
                               color: Colors.white70,
                               fontSize: 11,
                             ),
@@ -307,32 +373,26 @@ class Nonelectrictabcontent extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     Expanded(
                       child: Container(
-                        width: 140,
-                        height: 210,
+                        width: double.infinity,
                         color: Colors.lightBlue.shade100.withOpacity(0.7),
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 12),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 27),
-                              child: Text(
-                                'Assistance\nremind in 3 minutes',
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontSize: 12,
-                                  height: 1.4,
-
-                                ),
+                            Text(
+                              'assistance_remind'.tr(),
+                              style: const TextStyle(
+                                color: Colors.black87,
+                                fontSize: 12,
+                                height: 1.4,
                               ),
+                              textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 16),
-
-                            /// زر Call Now
                             SizedBox(
                               width: 110,
                               height: 35,
@@ -342,18 +402,20 @@ class Nonelectrictabcontent extends StatelessWidget {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   ),
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  padding:
+                                  const EdgeInsets.symmetric(vertical: 8),
                                 ),
                                 onPressed: () {},
-                                icon: const Icon(Icons.call, size: 16, color: Colors.white),
-                                label: const Text(
-                                  'Call Now',
-                                  style: TextStyle(fontSize: 12, color: Colors.white),
+                                icon: const Icon(Icons.call,
+                                    size: 16, color: Colors.white),
+                                label: Text(
+                                  'call_now'.tr(),
+                                  style: const TextStyle(
+                                      fontSize: 12, color: Colors.white),
                                 ),
                               ),
                             ),
                             const SizedBox(height: 10),
-
                             SizedBox(
                               width: 110,
                               height: 33,
@@ -363,13 +425,16 @@ class Nonelectrictabcontent extends StatelessWidget {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   ),
-                                  padding: const EdgeInsets.symmetric(vertical: 8),
+                                  padding:
+                                  const EdgeInsets.symmetric(vertical: 8),
                                 ),
                                 onPressed: () {},
-                                icon: const Icon(Icons.chat, size: 16, color: Colors.white),
-                                label: const Text(
-                                  'Chat Us',
-                                  style: TextStyle(fontSize: 12, color: Colors.white),
+                                icon: const Icon(Icons.chat,
+                                    size: 16, color: Colors.white),
+                                label: Text(
+                                  'chat_us'.tr(),
+                                  style: const TextStyle(
+                                      fontSize: 12, color: Colors.white),
                                 ),
                               ),
                             ),
@@ -380,40 +445,32 @@ class Nonelectrictabcontent extends StatelessWidget {
                   ],
                 ),
               ),
-            )
+            ),
           ),
         ],
       ),
-
     );
   }
-Widget _buildTag(String text, Color bg, Color textColor) {
-  return
-    Container(
-      width: 120,
-    height: 40,
-    decoration: BoxDecoration(
-      color: bg,
-      borderRadius: BorderRadius.circular(22),
-      border: Border.all(color: Colors.black12.withOpacity(0.1)),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.black12.withOpacity(0.05),
-          blurRadius: 4,
-          offset: const Offset(0, 2),
-        ),
-      ],
-    ),
-    child: Center(
-      child: Text(
-        text,
-        style: TextStyle(
-          color: textColor,
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-        ),
+
+  Widget _directionalTextContainer(bool isArabic, Widget child) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12.withOpacity(0.05),
+            blurRadius: 6,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
-    ),
-  );
-}
+      child: Directionality(
+        textDirection: isArabic ? ui.TextDirection.rtl : ui.TextDirection.ltr,
+        child: child,
+      ),
+    );
+  }
+
 }

@@ -7,6 +7,10 @@ class PageRouteName{
   static const String orders = '/orders';
   static const String account = '/account';
   static const String saved = '/saved';
+  static const String nearby = '/nearby';
+  static const String directions = '/directions';
+
+
 
 
 
@@ -17,6 +21,7 @@ class PageRouteName{
   static const String check = '/check';
   static const String reset = '/reset';
   static const String onboarding = '/onboarding';
+
 
 
 

@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
 import 'package:hmmam_app/core/route/routes.dart';
+import 'package:hmmam_app/theme/app_theme.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -21,6 +23,33 @@ class _OnBoardingState extends State<OnBoarding> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            // ====== Language Switch Button ======
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    icon: Text(
+                      context.locale.languageCode == 'en' ? 'AR' : 'EN',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (context.locale.languageCode == 'en') {
+                        context.setLocale(const Locale('ar'));
+                      } else {
+                        context.setLocale(const Locale('en'));
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+
             // ====== PageView ======
             Expanded(
               child: PageView(
@@ -31,20 +60,22 @@ class _OnBoardingState extends State<OnBoarding> {
                 children: [
                   _buildPage(
                     image: AssetsManager.onboard1,
-                    description:
-                    'Illustration description will display here about 1-2 paragraph',
+                    title: "find_your_destination".tr(),
+                    description: "onboarding".tr(),
                     pageIndex: 0,
                   ),
                   _buildPage(
                     image: AssetsManager.onboard2,
-                    description:
-                    'Illustration description will display here about 1-2 paragraph',
+                    title: "booking_your_seat".tr(),
+                    description: "onboarding".tr(),
                     pageIndex: 1,
                   ),
                   _buildPage(
                     image: AssetsManager.onboard3,
-                    description:
-                    'Illustration description will display here about 1-2 paragraph',
+                    title: "enjoy_your_trip".tr(),
+
+
+                    description: "onboarding".tr(),
                     pageIndex: 2,
                   ),
                 ],
@@ -72,14 +103,14 @@ class _OnBoardingState extends State<OnBoarding> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightBlueAccent,
+                    backgroundColor: AppColor.primary,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
-                    "Let’s Get Started",
-                    style: TextStyle(
+                  child: Text(
+                    "buttononboarding".tr(),
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -97,6 +128,7 @@ class _OnBoardingState extends State<OnBoarding> {
   // ====== Page Builder ======
   Widget _buildPage({
     required String image,
+    required String title,
     required String description,
     required int pageIndex,
   }) {
@@ -121,6 +153,13 @@ class _OnBoardingState extends State<OnBoarding> {
             ),
 
             const SizedBox(height: 12),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: AppColor.textblack.copyWith(fontSize: 20)
+            ),
+            const SizedBox(height: 12),
+
 
             // ====== Description ======
             Text(
@@ -135,7 +174,7 @@ class _OnBoardingState extends State<OnBoarding> {
 
             const SizedBox(height: 20),
 
-            // ====== Page Indicator (moved here) ======
+            // ====== Page Indicator ======
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(3, (index) {
@@ -146,7 +185,7 @@ class _OnBoardingState extends State<OnBoarding> {
                   height: 10,
                   decoration: BoxDecoration(
                     color: _currentPage == index
-                        ? Colors.lightBlueAccent
+                        ? AppColor.primary
                         : Colors.grey[300],
                     shape: BoxShape.circle,
                   ),

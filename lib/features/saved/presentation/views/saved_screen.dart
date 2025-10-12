@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
 import 'package:hmmam_app/core/route/routes.dart';
@@ -12,7 +13,7 @@ class SavedScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.white,
       appBar: AppBar(
-        title: Text("Saved", style: AppColor.appBar),
+        title: Text("saved".tr(), style: AppColor.appBar),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
           onPressed: () {
@@ -33,7 +34,7 @@ class SavedScreen extends StatelessWidget {
           const SizedBox(height: 10),
           Center(
             child: Text(
-              "Keep track of items you love with\nSaved!",
+              "keep_track_title".tr(),
               textAlign: TextAlign.center,
               style: AppColor.textblack.copyWith(fontSize: 20),
             ),
@@ -41,7 +42,7 @@ class SavedScreen extends StatelessWidget {
           const SizedBox(height: 6),
           Center(
             child: Text(
-              "Save the items you love now and book\nthem later when you are ready",
+              "keep_track_subtitle".tr(),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
@@ -66,7 +67,7 @@ class SavedScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
                     child: Text(
-                      "Log in",
+                      "login".tr(),
                       style: TextStyle(
                         color: AppColor.primary,
                         fontSize: 16,
@@ -89,8 +90,8 @@ class SavedScreen extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 14),
                     ),
-                    child: const Text(
-                      "Register",
+                    child:  Text(
+                      "register".tr(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hmmam_app/core/route/routes.dart';
@@ -29,19 +30,38 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Login",
+          "login".tr(),
           style: AppColor.appBar,
         ),
+        actions: [
+          IconButton(
+            icon: Text(
+              context.locale.languageCode == 'en' ? 'AR' : 'EN',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            onPressed: () {
+              if (context.locale.languageCode == 'en') {
+                context.setLocale(const Locale('ar'));
+              } else {
+                context.setLocale(const Locale('en'));
+              }
+            },
+          ),
+        ],
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 16,top: 9),
+        padding: const EdgeInsets.only(left: 16,top: 9,right: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Login to your account Travel App",style: AppColor.textgrey,),
+            Text("login_to_your_account_travel_app".tr(),style: AppColor.textgrey,),
             SizedBox(height: 30,),
-            Text("Phone Number", style: AppColor.textblack),
+            Text("phone".tr(), style: AppColor.textblack),
             const SizedBox(height: 8),
             Row(
               children: [
@@ -82,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onChanged: (_) => setState(() {}),
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
-                      hintText: 'Enter your phone number',
+                      hintText: 'enter_your_phone_number'.tr(),
                       hintStyle: const TextStyle(color: Colors.grey),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                       enabledBorder: OutlineInputBorder(
@@ -100,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
             SizedBox(height: 30,),
-            Text("Password", style: AppColor.textblack),
+            Text("password".tr(), style: AppColor.textblack),
             const SizedBox(height: 4),
             SizedBox(
               width: 370,
@@ -110,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 onChanged: (_) => setState(() {}),
                 obscureText: !isPasswordVisible,
                 decoration: InputDecoration(
-                  hintText: "Enter your password",
+                  hintText: "enter_your_password".tr(),
                   hintStyle: AppColor.textgrey,
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -163,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      "Remember me",
+                      "remember_me".tr(),
                       style: AppColor.textgrey,
                     ),
                   ],
@@ -175,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushNamed(context, PageRouteName.forget);
                     },
                     child: Text(
-                      "Forgot Password?",
+                      "forgot_password?".tr(),
                       style: AppColor.textprimary.copyWith(
                         fontWeight: FontWeight.w600,
                       ),
@@ -205,8 +225,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushNamed(context, PageRouteName.main);
                   }
                       : null,
-                  child: const Text(
-                    "Login",
+                  child:Text(
+                    "login".tr(),
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                   ),
                 ),
