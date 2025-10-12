@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/features/home/presentation/views/ElectricTabContent.dart';
 import 'package:hmmam_app/features/home/presentation/views/NonElectricTabContent.dart';
@@ -23,14 +24,20 @@ class _WheelchairTypeWidgetState extends State<WheelchairTypeWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _buildTypeButton(
-              title: "Electric",
+              title: context.locale.languageCode == 'ar'
+                  ? "كهربائي"
+                  : "electric",
+
               image: "assets/images/png/cycle.png",
               isSelected: isElectric,
               onTap: () => setState(() => isElectric = true),
             ),
             const SizedBox(width: 16),
             _buildTypeButton(
-              title: "Non Electric",
+              title: context.locale.languageCode == 'ar'
+                  ? "غير كهربائي"
+                  : "Non Electric",
+
               image: "assets/images/png/cycle2.png",
               isSelected: !isElectric,
               onTap: () => setState(() => isElectric = false),

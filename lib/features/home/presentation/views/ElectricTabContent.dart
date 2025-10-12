@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
+import 'package:hmmam_app/core/route/routes.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
 
 class Electrictabcontent extends StatelessWidget {
@@ -12,7 +14,7 @@ class Electrictabcontent extends StatelessWidget {
     double filledHeight = (batteryLevel / 100) * 200;
 
     return Padding(
-      padding: const EdgeInsets.only(top: 5, left: 15,right: 3),
+      padding: const EdgeInsets.only(top: 5, left: 15,right: 15),
       child: Column(
         children: [
           Row(
@@ -80,12 +82,17 @@ class Electrictabcontent extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "${batteryLevel.toInt()}",
+                    context.locale.languageCode == 'ar'
+                        ? _convertToArabicNumbers(batteryLevel.toStringAsFixed(0))
+                        : batteryLevel.toStringAsFixed(0),
                     style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  const Text(
-                    "Battery%",
+
+                  Text(
+                    "battery%".tr(),
                     style: TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                 ],
@@ -111,8 +118,8 @@ class Electrictabcontent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
-                        "Range",
+                       Text(
+                        "range".tr(),
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey,
@@ -122,8 +129,8 @@ class Electrictabcontent extends StatelessWidget {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
-                          const Text(
-                            "100",
+                           Text(
+                            "100".tr(),
                             style: TextStyle(
                               fontSize: 26,
                               fontWeight: FontWeight.bold,
@@ -131,8 +138,8 @@ class Electrictabcontent extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 4),
-                          const Text(
-                            "km",
+                          Text(
+                            "km".tr(),
                             style: TextStyle(
                               fontSize: 13,
                               color: Colors.grey,
@@ -147,36 +154,49 @@ class Electrictabcontent extends StatelessWidget {
 
 
               SizedBox(width: 20,),
-              Container(
-                width: 200,
-                height: 70,
-                decoration: BoxDecoration(
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, PageRouteName.nearby);
+                },
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  width: 200,
+                  height: 70,
+                  decoration: BoxDecoration(
                     color: AppColor.primary,
-                    border:Border.all(
-                        color: AppColor.grey3
-                    ),borderRadius: BorderRadius.circular(16),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 33),
-                      child: Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: AppColor.white,
-                          borderRadius: BorderRadius.circular(50),
+                    border: Border.all(color: AppColor.grey3),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            color: AppColor.white,
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: const Icon(
+                            Icons.power_settings_new_outlined,
+                            color: AppColor.primary,
+                            size: 24,
+                          ),
                         ),
-                        child: Icon(Icons.power_settings_new_outlined,color: AppColor.primary,),
-                      ),
-
+                        const SizedBox(width: 12),
+                        Text(
+                          "power_off".tr(),
+                          style: AppColor.textwhite,
+                        ),
+                      ],
                     ),
-                    SizedBox(width: 10,),
-                    Text("Power Off",style:AppColor.textwhite,)
-                  ],
+                  ),
                 ),
               )
+
+
             ],
           ),
           Container(
@@ -208,9 +228,9 @@ class Electrictabcontent extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
+                    children:  [
                       Text(
-                        "Register Now!",
+                        "register_now!".tr(),
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -219,7 +239,7 @@ class Electrictabcontent extends StatelessWidget {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        "Create or login an account and get more benefits",
+                        "create_or_login_an_account_and_get_more_benefits".tr(),
                         style: TextStyle(
                           fontSize: 13,
                           color: Colors.grey,
@@ -238,4 +258,13 @@ class Electrictabcontent extends StatelessWidget {
 
     );
   }
+  String _convertToArabicNumbers(String input) {
+    const english = ['0','1','2','3','4','5','6','7','8','9'];
+    const arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+    for (int i = 0; i < english.length; i++) {
+      input = input.replaceAll(english[i], arabic[i]);
+    }
+    return input;
+  }
+
 }

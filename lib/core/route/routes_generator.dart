@@ -7,6 +7,8 @@ import 'package:hmmam_app/features/auth/forget_password/presentation/views/reset
 import 'package:hmmam_app/features/auth/login/presentation/views/login_screen.dart';
 import 'package:hmmam_app/features/auth/regiser/presentation/views/activate_screen.dart';
 import 'package:hmmam_app/features/auth/regiser/presentation/views/signup_screen.dart';
+import 'package:hmmam_app/features/home/presentation/views/NearbyWheelchairScreen.dart';
+import 'package:hmmam_app/features/home/presentation/views/directions.dart';
 import 'package:hmmam_app/features/home/presentation/views/home_screen.dart';
 import 'package:hmmam_app/features/main/presentation/views/main_screen.dart';
 import 'package:hmmam_app/features/onboarding/OnBoarding.dart';
@@ -48,7 +50,7 @@ class RoutesGenerator {
         );
       case PageRouteName.account:
         return MaterialPageRoute(
-          builder: (context) => const AccountScreen(),
+          builder: (context) =>  AccountScreen(),
           settings: settings,
         );
       case PageRouteName.saved:
@@ -72,11 +74,22 @@ class RoutesGenerator {
           builder: (context) => const ResetPassword(),
           settings: settings,
         );
+      case PageRouteName.nearby:
+        return MaterialPageRoute(
+          builder: (context) => const NearbyWheelchairScreen(),
+          settings: settings,
+        );
+      case PageRouteName.directions:
+        return MaterialPageRoute(
+          builder: (context) => const Directions(),
+          settings: settings,
+        );
 
 
       default:
         return MaterialPageRoute(
           builder: (context) => OnBoarding(),
+          //builder: (context)=> MainScreen(),
           settings: settings,
         );
     }

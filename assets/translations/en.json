@@ -1,0 +1,106 @@
+{
+  "onboarding": "'Illustration description will display here about 1-2 paragraph'",
+  "buttononboarding": "Let’s Get Started",
+  "register": "Register",
+  "to_get_started_please_fill_out_the_registration_form_below": "To get started, please fill out the registration form below",
+  "name": "Name",
+  "phone": "Phone",
+  "password": "Password",
+  "password_must_be_at_least_8_characters_long!": "Password must be at least 8 characters long!",
+  "by_clicking_\"register,\"_you_agree_to_our": "By clicking \"Register,\" you agree to our",
+  "terms_and_conditions": "terms and condtions",
+  "and": " and  ",
+  "privacy_policy": "privacy policy",
+  "have_you_an_account?": "Have you an account?",
+  "login": "Login",
+  "e.g_vixturistic": "e.g. Vixturistic",
+  "enter_your_phone_number": "Enter your phone number",
+"enter_your_password": "Enter your password",
+  "find_your_destination": "Find your Destination",
+"booking_your_seat": "Booking your Seat",
+  "enjoy_your_trip": "Enjoy your Trip",
+
+  "verify_phone": "Verify Phone",
+  "we_have_sent_code": "We have sent the code verification to +6281902127979",
+  "didn't_receive_the_code?": "Didn't receive the code?",
+  "resend.": "Resend.",
+  "Verify": "verify",
+
+  "login_to_your_account_travel_app": "Login to your account Travel App",
+  "remember_me": "Remember me",
+  "forgot_password?": "Forgot Password?",
+
+  "search_for_wheelchair_for_you": "Search for wheelchair for you",
+
+  "home": "Home",
+  "order": "Order",
+  "saved": "Saved",
+  "account": "Account",
+
+  "electric": "Electric",
+  "non_electric": "Non Electric",
+  "selected": "Selected ",
+  "wheelchair": "Wheelchair ",
+  "battery%": "Battery%",
+  "range": "Range",
+  "100":"100",
+"km": "km",
+  "power_off": "Power Off",
+
+  "register_now!": "Register Now!",
+  "create_or_login_an_account_and_get_more_benefits": "Create or login an account and get more benefits",
+
+
+  "location": "Location",
+  "terminal_gate": "Terminal 3 - Gate A",
+  "date": "Date",
+  "sample_date": "Aug 8, 2022",
+  "time": "Time",
+  "sample_time": "08:00 am",
+  "self_push": "Self-push",
+  "foldable": "Foldable",
+  "wide_seat": "Wide seat",
+
+  "assistant_name": "Ahmed",
+  "assistant_title": "Mobility Assistance",
+  "assistance_remind": "Assistance remind in 3 minutes",
+  "call_now": "Call Now",
+  "chat_us": "Chat Us",
+
+  "set_your_location": "Set your location",
+  "nearby_wheelchair": "Nearby Wheelchair",
+
+  "wheelchair_X-214": "Wheelchair X-214",
+  "5_meters_away": "5 Meters Away",
+  "battery": "Battery",
+  "80%": "80 %",
+  "50_km": "50 km",
+  "rent": "Rent",
+
+
+  "wheelchairـnavigation": "Wheelchair Navigation",
+  "direction": "Direction",
+
+
+  "keep_track_title": "Keep track of items you love with\nSaved!",
+  "keep_track_subtitle": "Save the items you love now and book\nthem later when you are ready",
+
+  "your_order": "Your Order",
+  "on_going": "On going",
+  "complete": "Complete",
+  "cancel": "Cancel",
+  "completed_orders": "Completed Orders",
+  "cancelled_orders": "Cancelled Orders",
+
+  "access_your_booking_with_ease": "Access your booking with ease",
+  "login_register_to_see_bookings": "Log in or Register to see your active and\npast bookings, as well as to manage your\nbooking",
+
+  "change_profile_data": "Change Profile Data",
+  "setting": "Setting",
+  "help_center": "Help & Center",
+  "newsletter": "Newsletter",
+  "version_number": "Version 1.0.0",
+
+  "profile": "Profile",
+  "create_or_login_message": "Create or login an account to join member\nand get more benefits!"
+}

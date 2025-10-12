@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/route/routes.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
@@ -47,9 +48,28 @@ class _ActivateScreenState extends State<ActivateScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Verify Phone",
+          "verify_phone".tr(),
           style: AppColor.appBar,
         ),
+        actions: [
+          IconButton(
+            icon: Text(
+              context.locale.languageCode == 'en' ? 'AR' : 'EN',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.black,
+              ),
+            ),
+            onPressed: () {
+              if (context.locale.languageCode == 'en') {
+                context.setLocale(const Locale('ar'));
+              } else {
+                context.setLocale(const Locale('en'));
+              }
+            },
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 40.0),
@@ -58,10 +78,11 @@ class _ActivateScreenState extends State<ActivateScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "We have sent the code verification to \n+6281902127979",
+                "we_have_sent_code".tr(),
                 style: AppColor.textgrey,
                 textAlign: TextAlign.center,
               ),
+
               const SizedBox(height: 30),
 
               // PIN input fields
@@ -76,9 +97,9 @@ class _ActivateScreenState extends State<ActivateScreen> {
                   borderRadius: BorderRadius.circular(8),
                   fieldHeight: 55,
                   fieldWidth: 55,
-                  inactiveColor:  AppColor.grey,
+                  inactiveColor: AppColor.grey,
                   activeColor: AppColor.primary,
-                  selectedColor:  AppColor.grey,
+                  selectedColor: AppColor.grey,
                 ),
                 onChanged: (value) {
                   setState(() {
@@ -104,11 +125,11 @@ class _ActivateScreenState extends State<ActivateScreen> {
               // Resend text
               RichText(
                 text: TextSpan(
-                  text: "Didn't receive the code? ",
+                  text: "didn't_receive_the_code?".tr(),
                   style: const TextStyle(color: AppColor.black, fontSize: 14),
                   children: [
                     TextSpan(
-                      text: "Resend.",
+                      text: " ${"resend.".tr()}",
                       style: const TextStyle(
                         color: AppColor.primary,
                         fontWeight: FontWeight.w600,
@@ -122,10 +143,11 @@ class _ActivateScreenState extends State<ActivateScreen> {
 
               // Verify button
               ElevatedButton(
-                onPressed: isButtonActive ? () {
+                onPressed: isButtonActive
+                    ? () {
                   Navigator.pushNamed(context, PageRouteName.login);
-
-                } : null,
+                }
+                    : null,
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                   backgroundColor:
@@ -136,9 +158,9 @@ class _ActivateScreenState extends State<ActivateScreen> {
                   ),
                   elevation: 0,
                 ),
-                child: const Text(
-                  "Verify",
-                  style: TextStyle(
+                child: Text(
+                  "verify".tr(),
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/route/routes.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
@@ -48,12 +49,12 @@ class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   const SizedBox(height: 40),
                   Text(
-                    "Profile",
+                    "profile".tr(),
                     style: AppColor.textwhite.copyWith(fontSize: 20),
                   ),
                   const SizedBox(height: 20),
-                  const Text(
-                    "Create or login an account to join member\nand get more benefits!",
+                   Text(
+                    "create_or_login_message".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
@@ -74,8 +75,8 @@ class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: const Text(
-                      "Register",
+                    child:  Text(
+                      "register".tr(),
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ),
@@ -91,8 +92,8 @@ class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    child: const Text(
-                      "Login",
+                    child:  Text(
+                      "login".tr(),
                       style: TextStyle(color: Colors.black, fontSize: 16),
                     ),
                   ),

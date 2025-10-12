@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/features/home/presentation/widgets/WheelchairTypeWidget.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
@@ -20,20 +21,26 @@ class HomeScreen extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: 'Selected ',
+                      text: context.locale.languageCode == 'ar'
+                          ? 'تم الاختيار'
+                          : 'Selected',
+
                       style: AppColor.textblack.copyWith(
                         fontSize: 18,
                         fontWeight: FontWeight.w200,
                       ),
                     ),
                     TextSpan(
-                      text: 'Wheelchair',
+                      text: context.locale.languageCode == 'ar'
+                          ? 'كرسي متحرك'
+                          : 'wheelchair',
                       style: TextStyle(
                         color: AppColor.primary,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+
                   ],
                 ),
               ),

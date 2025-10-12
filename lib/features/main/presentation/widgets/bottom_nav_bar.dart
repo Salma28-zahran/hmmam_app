@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
@@ -23,22 +24,33 @@ class BottomNavBar extends StatelessWidget {
       unselectedItemColor: Colors.grey,
       showUnselectedLabels: true,
       elevation: 10,
-      items: const [
+      items:  [
         BottomNavigationBarItem(
           icon: Icon(FontAwesomeIcons.homeLg),
-          label: 'Home',
+          label: context.locale.languageCode == 'ar'
+              ? 'الرئيسية'
+              : 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.message),
-          label: 'Order',
+          label: context.locale.languageCode == 'ar'
+              ? 'الطلبات'
+              : 'Orders',
+
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.bookmarks_rounded),
-          label: 'Saved',
+          label: context.locale.languageCode == 'ar'
+              ? 'المحفوظات'
+              : 'Saved',
+
         ),
         BottomNavigationBarItem(
           icon: Icon(FontAwesomeIcons.user),
-          label: 'Account',
+          label: context.locale.languageCode == 'ar'
+              ? 'الحساب'
+              : 'Account',
+
         ),
       ],
     );
