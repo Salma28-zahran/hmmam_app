@@ -11,8 +11,11 @@ class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Container(
-      height: preferredSize.height,
+      height: height * 0.40,
       width: double.infinity,
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -27,11 +30,11 @@ class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: Stack(
         children: [
           Positioned(
-            top: -60,
-            left: -80,
+            top: -height * 0.075,
+            left: -width * 0.20,
             child: Container(
-              width: 220,
-              height: 220,
+              width: width * 0.55,
+              height: width * 0.55,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Color(0x3390D7EC),
@@ -39,62 +42,66 @@ class BigProfileAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
 
-
           Align(
             alignment: Alignment.center,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40),
+              padding: EdgeInsets.symmetric(horizontal: width * 0.10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 40),
+                  SizedBox(height: height * 0.05),
                   Text(
                     "profile".tr(),
-                    style: AppColor.textwhite.copyWith(fontSize: 20),
+                    style: AppColor.textwhite.copyWith(fontSize: width * 0.05),
                   ),
-                  const SizedBox(height: 20),
-                   Text(
+                  SizedBox(height: height * 0.025),
+                  Text(
                     "create_or_login_message".tr(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 15,
+                      fontSize: width * 0.038,
                       height: 1.5,
                     ),
                   ),
-                  const SizedBox(height: 40),
+                  SizedBox(height: height * 0.05),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, PageRouteName.signup);
-
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff074F5F),
-                      minimumSize: const Size(double.infinity, 50),
+                      backgroundColor: const Color(0xff074F5F),
+                      minimumSize: Size(double.infinity, height * 0.055),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(width * 0.02),
                       ),
                     ),
-                    child:  Text(
+                    child: Text(
                       "register".tr(),
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: width * 0.042,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(height: height * 0.010),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, PageRouteName.login);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.white,
-                      minimumSize: const Size(double.infinity, 50),
+                      minimumSize: Size(double.infinity, height * 0.055),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(width * 0.02),
                       ),
                     ),
-                    child:  Text(
+                    child: Text(
                       "login".tr(),
-                      style: TextStyle(color: Colors.black, fontSize: 16),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: width * 0.042,
+                      ),
                     ),
                   ),
                 ],

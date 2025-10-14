@@ -102,5 +102,10 @@
   "version_number": "Version 1.0.0",
 
   "profile": "Profile",
-  "create_or_login_message": "Create or login an account to join member\nand get more benefits!"
+  "create_or_login_message": "Create or login an account to join member\nand get more benefits!",
+  "notifications": "Notifications",
+  "no_notifications_yet": "No Notifications Yet",
+
+  "all_notifications_text": "All notifications we send will appear here,\nso you can view them easily anytime."
+
 }

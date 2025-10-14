@@ -10,31 +10,41 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return ClipPath(
       clipper: SideCurveClipper(),
       child: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColor.primary,
         elevation: 0,
-        toolbarHeight: 115,
+        toolbarHeight: height * 0.14,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                const CircleAvatar(
-                  radius: 22,
+                CircleAvatar(
+                  radius: width * 0.055,
                   backgroundColor: Colors.white,
-                  child: Icon(Icons.person_rounded, color: Colors.cyan, size: 30),
+                  child: Icon(
+                    Icons.person_rounded,
+                    color: Colors.cyan,
+                    size: width * 0.075,
+                  ),
                 ),
-                const SizedBox(width: 15),
+                SizedBox(width: width * 0.04),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
-                    fixedSize: const Size(100, 32),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                    fixedSize: Size(width * 0.26, height * 0.04),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.03,
+                      vertical: height * 0.005,
+                    ),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(width * 0.02),
                     ),
                   ),
                   onPressed: () {
@@ -42,20 +52,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   },
                   child: Text(
                     'login'.tr(),
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
+                      fontSize: width * 0.038,
                     ),
                   ),
                 ),
                 const Spacer(),
-                const SizedBox(width: 10),
+                SizedBox(width: width * 0.025),
                 IconButton(
                   icon: Text(
                     context.locale.languageCode == 'en' ? 'AR' : 'EN',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                      fontSize: width * 0.042,
                       color: Colors.black,
                     ),
                   ),
@@ -67,42 +78,47 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     }
                   },
                 ),
-                Image.asset(
-                  AssetsManager.notification,
-                  width: 30,
-                  height: 37,
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, PageRouteName.notifications);
+                  },
+                  child: Image.asset(
+                    AssetsManager.notification,
+                    width: width * 0.075,
+                    height: height * 0.045,
+                  ),
                 ),
-
               ],
             ),
 
-            const SizedBox(height: 25),
+            SizedBox(height: height * 0.03),
             Row(
               children: [
                 Expanded(
                   child: Container(
-                    height: 45,
+                    height: height * 0.055,
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(width * 0.035),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.03),
                     child: Row(
                       children: [
-                        const Icon(FontAwesomeIcons.search, color: Colors.grey),
-                        const SizedBox(width: 8),
+                        Icon(FontAwesomeIcons.search,
+                            color: Colors.grey, size: width * 0.045),
+                        SizedBox(width: width * 0.02),
                         Expanded(
                           child: TextField(
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.black,
-                              fontSize: 16,
+                              fontSize: width * 0.042,
                               fontWeight: FontWeight.w500,
                             ),
                             decoration: InputDecoration(
                               hintText: 'search_for_wheelchair_for_you'.tr(),
                               hintStyle: TextStyle(
                                 color: AppColor.grey,
-                                fontSize: 15,
+                                fontSize: width * 0.038,
                               ),
                               border: InputBorder.none,
                               isCollapsed: true,
@@ -113,16 +129,19 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: width * 0.02),
                 Container(
-                  height: 45,
-                  width: 45,
+                  height: height * 0.055,
+                  width: height * 0.055,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(width * 0.035),
                   ),
-                  child:
-                  const Icon(FontAwesomeIcons.list, color: AppColor.grey),
+                  child: Icon(
+                    FontAwesomeIcons.list,
+                    color: AppColor.grey,
+                    size: width * 0.045,
+                  ),
                 ),
               ],
             ),
@@ -144,15 +163,19 @@ class SideCurveClipper extends CustomClipper<Path> {
     path.lineTo(0, size.height - 10);
 
     path.quadraticBezierTo(
-      size.width * 0.05, size.height + 10,
-      size.width * 0.15, size.height,
+      size.width * 0.05,
+      size.height + 10,
+      size.width * 0.15,
+      size.height,
     );
 
     path.lineTo(size.width * 0.85, size.height);
 
     path.quadraticBezierTo(
-      size.width * 0.95, size.height + 10,
-      size.width, size.height - 10,
+      size.width * 0.95,
+      size.height + 10,
+      size.width,
+      size.height - 10,
     );
 
     path.lineTo(size.width, 0);
@@ -164,4 +187,3 @@ class SideCurveClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
-

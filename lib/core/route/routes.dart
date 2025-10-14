@@ -9,6 +9,8 @@ class PageRouteName{
   static const String saved = '/saved';
   static const String nearby = '/nearby';
   static const String directions = '/directions';
+  static const String notifications = '/notifications';
+
 
 
 
