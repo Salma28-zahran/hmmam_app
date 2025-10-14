@@ -11,6 +11,7 @@ import 'package:hmmam_app/features/home/presentation/views/NearbyWheelchairScree
 import 'package:hmmam_app/features/home/presentation/views/directions.dart';
 import 'package:hmmam_app/features/home/presentation/views/home_screen.dart';
 import 'package:hmmam_app/features/main/presentation/views/main_screen.dart';
+import 'package:hmmam_app/features/notifications/presentation/views/notifications_screen.dart';
 import 'package:hmmam_app/features/onboarding/OnBoarding.dart';
 import 'package:hmmam_app/features/orders/presentation/views/orders_screen.dart';
 import 'package:hmmam_app/features/saved/presentation/views/saved_screen.dart';
@@ -84,12 +85,18 @@ class RoutesGenerator {
           builder: (context) => const Directions(),
           settings: settings,
         );
+      case PageRouteName.notifications:
+        return MaterialPageRoute(
+          builder: (context) => const NotificationsScreen(),
+          settings: settings,
+        );
+
 
 
       default:
         return MaterialPageRoute(
-          builder: (context) => OnBoarding(),
-          //builder: (context)=> MainScreen(),
+         builder: (context) => OnBoarding(),
+         // builder: (context)=> MainScreen(),
           settings: settings,
         );
     }

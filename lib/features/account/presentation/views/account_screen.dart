@@ -4,7 +4,7 @@ import 'package:hmmam_app/features/account/presentation/widgets/big_profile_appb
 import 'package:hmmam_app/theme/app_theme.dart';
 
 class AccountScreen extends StatelessWidget {
-   AccountScreen({super.key});
+  AccountScreen({super.key});
 
   final List<_SettingItem> items = [
     _SettingItem(label: 'change_profile_data', icon: Icons.person_outline),
@@ -15,30 +15,33 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
-      appBar: BigProfileAppBar(),
+      appBar: const BigProfileAppBar(),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(width * 0.02),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 ListView.separated(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.symmetric(vertical: height * 0.00),
                   itemCount: items.length,
                   separatorBuilder: (context, index) => Column(
-                    children: const [
-                      SizedBox(height: 7),
+                    children: [
+                      SizedBox(height: height * 0.005),
                       Divider(
-                        height: 24,
+                        height: height * 0.01,
                         thickness: 1,
-                        indent: 16,
-                        endIndent: 16,
-                        color: Color(0xFFEAEAEA),
+                        indent: width * 0.04,
+                        endIndent: width * 0.04,
+                        color: const Color(0xFFEAEAEA),
                       ),
-                      SizedBox(height: 13),
+                      SizedBox(height: height * 0.016),
                     ],
                   ),
                   itemBuilder: (context, index) {
@@ -50,7 +53,7 @@ class AccountScreen extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: 18),
+                SizedBox(height: height * 0.022),
                 const Text(
                   "Version 1.0.0",
                   style: TextStyle(
@@ -59,7 +62,7 @@ class AccountScreen extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: height * 0.012),
               ],
             ),
           ),
@@ -90,29 +93,39 @@ class _SettingsTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.035,
+          vertical: height * 0.007,
+        ),
         child: Row(
           children: [
             Center(
-              child: Icon(iconData, size: 28, color: Colors.grey.shade700),
+              child: Icon(
+                iconData,
+                size: width * 0.075,
+                color: Colors.grey.shade700,
+              ),
             ),
-            const SizedBox(width: 14),
+            SizedBox(width: width * 0.035),
             Expanded(
               child: Text(
                 label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 16,
+                  fontSize: width * 0.042,
                 ),
               ),
             ),
-            const Icon(
+            Icon(
               Icons.arrow_forward_ios_outlined,
               color: AppColor.grey,
-              size: 25,
+              size: width * 0.055,
             ),
           ],
         ),

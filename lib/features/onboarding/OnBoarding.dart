@@ -17,6 +17,10 @@ class _OnBoardingState extends State<OnBoarding> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -25,16 +29,19 @@ class _OnBoardingState extends State<OnBoarding> {
           children: [
             // ====== Language Switch Button ======
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+              padding: EdgeInsets.symmetric(
+                horizontal: width * 0.04, // 16
+                vertical: height * 0.012,  // 10
+              ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
                     icon: Text(
                       context.locale.languageCode == 'en' ? 'AR' : 'EN',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
+                        fontSize: width * 0.04, // 16
                         color: Colors.black,
                       ),
                     ),
@@ -59,22 +66,23 @@ class _OnBoardingState extends State<OnBoarding> {
                 },
                 children: [
                   _buildPage(
+                    context: context,
                     image: AssetsManager.onboard1,
                     title: "find_your_destination".tr(),
                     description: "onboarding".tr(),
                     pageIndex: 0,
                   ),
                   _buildPage(
+                    context: context,
                     image: AssetsManager.onboard2,
                     title: "booking_your_seat".tr(),
                     description: "onboarding".tr(),
                     pageIndex: 1,
                   ),
                   _buildPage(
+                    context: context,
                     image: AssetsManager.onboard3,
                     title: "enjoy_your_trip".tr(),
-
-
                     description: "onboarding".tr(),
                     pageIndex: 2,
                   ),
@@ -84,10 +92,13 @@ class _OnBoardingState extends State<OnBoarding> {
 
             // ====== Button ======
             Padding(
-              padding: const EdgeInsets.only(bottom: 40.0, top: 24.0),
+              padding: EdgeInsets.only(
+                bottom: height * 0.05, // 40
+                top: height * 0.03,    // 24
+              ),
               child: SizedBox(
-                width: 380,
-                height: 50,
+                width: width * 0.95, // 380
+                height: height * 0.06, // 50
                 child: ElevatedButton(
                   onPressed: () {
                     if (_currentPage < 2) {
@@ -105,13 +116,13 @@ class _OnBoardingState extends State<OnBoarding> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColor.primary,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(width * 0.03), // 12
                     ),
                   ),
                   child: Text(
                     "buttononboarding".tr(),
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize: width * 0.045, // 18
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -127,24 +138,29 @@ class _OnBoardingState extends State<OnBoarding> {
 
   // ====== Page Builder ======
   Widget _buildPage({
+    required BuildContext context,
     required String image,
     required String title,
     required String description,
     required int pageIndex,
   }) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+        padding: EdgeInsets.symmetric(horizontal: width * 0.08), // 30
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // ====== Image ======
             Container(
-              width: 360,
-              height: 360,
+              width: width * 0.9,  // 360
+              height: height * 0.42, // 360
               clipBehavior: Clip.hardEdge,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(width * 0.03), // 12
               ),
               child: FittedBox(
                 fit: BoxFit.cover,
@@ -152,27 +168,26 @@ class _OnBoardingState extends State<OnBoarding> {
               ),
             ),
 
-            const SizedBox(height: 12),
+            SizedBox(height: height * 0.015), // 12
             Text(
               title,
               textAlign: TextAlign.center,
-              style: AppColor.textblack.copyWith(fontSize: 20)
+              style: AppColor.textblack.copyWith(fontSize: width * 0.05), // 20
             ),
-            const SizedBox(height: 12),
-
+            SizedBox(height: height * 0.015), // 12
 
             // ====== Description ======
             Text(
               description,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 15,
+              style: TextStyle(
+                fontSize: width * 0.038, // 15
                 color: Colors.grey,
                 height: 1.4,
               ),
             ),
 
-            const SizedBox(height: 20),
+            SizedBox(height: height * 0.025), // 20
 
             // ====== Page Indicator ======
             Row(
@@ -180,9 +195,9 @@ class _OnBoardingState extends State<OnBoarding> {
               children: List.generate(3, (index) {
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: 10,
-                  height: 10,
+                  margin: EdgeInsets.symmetric(horizontal: width * 0.01), // 4
+                  width: width * 0.025, // 10
+                  height: width * 0.025, // 10
                   decoration: BoxDecoration(
                     color: _currentPage == index
                         ? AppColor.primary

@@ -10,12 +10,23 @@ class SavedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Scaffold(
       backgroundColor: AppColor.white,
       appBar: AppBar(
-        title: Text("saved".tr(), style: AppColor.appBar),
+        title: Text(
+          "saved".tr(),
+          style: AppColor.appBar.copyWith(fontSize: width * 0.05),
+        ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+            size: width * 0.05,
+          ),
           onPressed: () {
             Navigator.pushReplacement(
               context,
@@ -27,57 +38,71 @@ class SavedScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const SizedBox(height: 150),
+          SizedBox(height: height * 0.10), // 150
           Center(
-            child: Image.asset(AssetsManager.saved),
+            child: Image.asset(
+              AssetsManager.saved,
+              width: width * 0.8,
+            ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: height * 0.013), // 10
           Center(
             child: Text(
               "keep_track_title".tr(),
               textAlign: TextAlign.center,
-              style: AppColor.textblack.copyWith(fontSize: 20),
+              style: AppColor.textblack.copyWith(
+                fontSize: width * 0.05, // 20
+              ),
             ),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: height * 0.007), // 6
           Center(
             child: Text(
               "keep_track_subtitle".tr(),
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                fontSize: width * 0.04, // 16
+              ),
             ),
           ),
-          const SizedBox(height: 25),
+          SizedBox(height: height * 0.03), // 25
 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
+            padding: EdgeInsets.symmetric(horizontal: width * 0.1), // 40
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                // ====== Login Button ======
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, PageRouteName.login);
                     },
                     style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: AppColor.grey3, width: 1.5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: AppColor.grey3,
+                        width: width * 0.004, // 1.5
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(width * 0.02), // 8
+                      ),
+                      padding:
+                      EdgeInsets.symmetric(vertical: height * 0.013), // 14
                     ),
                     child: Text(
                       "login".tr(),
                       style: TextStyle(
                         color: AppColor.primary,
-                        fontSize: 16,
+                        fontSize: width * 0.04, // 16
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),
                 ),
 
-                const SizedBox(width: 16),
+                SizedBox(width: width * 0.04), // 16
+
+                // ====== Register Button ======
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () {
@@ -86,15 +111,16 @@ class SavedScreen extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.primary,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(width * 0.02), // 8
                       ),
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      padding:
+                      EdgeInsets.symmetric(vertical: height * 0.013), // 14
                     ),
-                    child:  Text(
+                    child: Text(
                       "register".tr(),
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 16,
+                        fontSize: width * 0.04, // 16
                         fontWeight: FontWeight.w500,
                       ),
                     ),
