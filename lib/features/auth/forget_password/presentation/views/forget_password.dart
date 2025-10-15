@@ -14,7 +14,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
 
   @override
   Widget build(BuildContext context) {
-    bool isFormValid = emailController.text.isNotEmpty ;
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
+    bool isFormValid = emailController.text.isNotEmpty;
 
     return Scaffold(
       appBar: AppBar(
@@ -24,50 +28,61 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 16,top: 9),
+        padding: EdgeInsets.only(
+          left: width * 0.04,
+          top: height * 0.012,
+          right: width * 0.04,
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Enter the email associated with your account and we'll send you an email with instructions for\n"
-                " resetting your password",style: AppColor.textgrey,
-            textAlign: TextAlign.left,),
-            SizedBox(height: 20,),
+            Text(
+              "Enter the email associated with your account and we'll send you an email with instructions for\nresetting your password",
+              style: AppColor.textgrey,
+              textAlign: TextAlign.left,
+            ),
+
+            SizedBox(height: height * 0.03),
+
             Text("Email", style: AppColor.textblack),
-            const SizedBox(height: 6),
+
+            SizedBox(height: height * 0.008),
+
             SizedBox(
-              width: 328,
-              height: 40,
+              width: width * 0.9,
+              height: height * 0.055,
               child: TextField(
                 controller: emailController,
                 onChanged: (_) => setState(() {}),
                 decoration: InputDecoration(
                   hintText: "vixturistic.studio@example.com",
                   hintStyle: AppColor.textgrey,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  contentPadding:
+                  EdgeInsets.symmetric(horizontal: width * 0.03),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(width * 0.02),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(width * 0.02),
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 20,),
+
+            SizedBox(height: height * 0.03),
+
             SizedBox(
-              width: 360,
-              height: 47,
+              width: width * 0.9,
+              height: height * 0.055,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: isFormValid
-                      ? AppColor.primary
-                      : Colors.grey.shade400,
+                  backgroundColor:
+                  isFormValid ? AppColor.primary : Colors.grey.shade400,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(width * 0.02),
                   ),
                 ),
                 onPressed: isFormValid
@@ -75,15 +90,15 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   Navigator.pushNamed(context, PageRouteName.check);
                 }
                     : null,
-                child: const Text(
+                child: Text(
                   "Reset Password",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: TextStyle(
+                    fontSize: width * 0.04,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),
-
-
-
           ],
         ),
       ),

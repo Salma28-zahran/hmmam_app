@@ -8,25 +8,27 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 16),
+            SizedBox(height: screenHeight * 0.02),
 
             Padding(
-              padding: const EdgeInsets.only(left: 8),
+              padding: EdgeInsets.only(left: screenWidth * 0.02),
               child: RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                       text: context.locale.languageCode == 'ar'
-                          ? 'تم الاختيار'
-                          : 'Selected',
-
+                          ? 'تم الاختيار  '
+                          : 'Selected  ',
                       style: AppColor.textblack.copyWith(
-                        fontSize: 18,
+                        fontSize: screenWidth * 0.045,
                         fontWeight: FontWeight.w200,
                       ),
                     ),
@@ -36,11 +38,10 @@ class HomeScreen extends StatelessWidget {
                           : 'wheelchair',
                       style: TextStyle(
                         color: AppColor.primary,
-                        fontSize: 18,
+                        fontSize: screenWidth * 0.045,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                   ],
                 ),
               ),

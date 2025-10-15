@@ -17,15 +17,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isPasswordVisible = false;
   bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     String selectedCode = '+20';
     final List<String> countryCodes = ['+20', '+966', '+971', '+1', '+44', '+62'];
+
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     bool isFormValid =
         phoneController.text.isNotEmpty &&
-        passwordController.text.isNotEmpty &&
-        isChecked;
-
+            passwordController.text.isNotEmpty &&
+            isChecked;
 
     return Scaffold(
       appBar: AppBar(
@@ -37,9 +42,9 @@ class _LoginScreenState extends State<LoginScreen> {
           IconButton(
             icon: Text(
               context.locale.languageCode == 'en' ? 'AR' : 'EN',
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: width * 0.04,
                 color: Colors.black,
               ),
             ),
@@ -53,26 +58,32 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ],
       ),
+
       body: Padding(
-        padding: const EdgeInsets.only(left: 16,top: 9,right: 16),
+        padding: EdgeInsets.only(
+          left: width * 0.04,
+          right: width * 0.04,
+          top: height * 0.01,
+        ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("login_to_your_account_travel_app".tr(),style: AppColor.textgrey,),
-            SizedBox(height: 30,),
+            Text("login_to_your_account_travel_app".tr(), style: AppColor.textgrey),
+            SizedBox(height: height * 0.04),
+
             Text("phone".tr(), style: AppColor.textblack),
-            const SizedBox(height: 8),
+            SizedBox(height: height * 0.01),
+
             Row(
               children: [
                 Container(
-                  width: 90,
-                  height: 40,
+                  width: width * 0.20,
+                  height: height * 0.044,
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColor.grey),
-                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: AppColor.grey3),
+                    borderRadius: BorderRadius.circular(width * 0.02),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: EdgeInsets.symmetric(horizontal: width * 0.02),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
                       value: selectedCode,
@@ -81,7 +92,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           .map(
                             (code) => DropdownMenuItem(
                           value: code,
-                          child: Text(code, style: const TextStyle(color: AppColor.grey)),
+                          child: Text(
+                            code,
+                            style: const TextStyle(color: AppColor.grey),
+                          ),
                         ),
                       )
                           .toList(),
@@ -93,10 +107,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(width: 6),
+                SizedBox(width: width * 0.015),
+
                 SizedBox(
-                  width: 240,
-                  height: 40,
+                  width: width * 0.60,
+                  height: height * 0.055,
                   child: TextField(
                     controller: phoneController,
                     onChanged: (_) => setState(() {}),
@@ -104,27 +119,29 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       hintText: 'enter_your_phone_number'.tr(),
                       hintStyle: const TextStyle(color: Colors.grey),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                      contentPadding: EdgeInsets.symmetric(horizontal: width * 0.025),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(width * 0.02),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(width * 0.02),
                       ),
                     ),
                   ),
                 ),
-
               ],
             ),
-            SizedBox(height: 30,),
+
+            SizedBox(height: height * 0.04),
+
             Text("password".tr(), style: AppColor.textblack),
-            const SizedBox(height: 4),
+            SizedBox(height: height * 0.01),
+
             SizedBox(
-              width: 370,
-              height: 40,
+              width: width * 0.95,
+              height: height * 0.055,
               child: TextField(
                 controller: passwordController,
                 onChanged: (_) => setState(() {}),
@@ -134,9 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintStyle: AppColor.textgrey,
                   suffixIcon: IconButton(
                     icon: Icon(
-                      isPasswordVisible
-                          ? Icons.visibility
-                          : Icons.visibility_off,
+                      isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                       color: Colors.grey,
                     ),
                     onPressed: () {
@@ -145,28 +160,29 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     },
                   ),
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  contentPadding: EdgeInsets.symmetric(horizontal: width * 0.025),
                   enabledBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(width * 0.02),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(width * 0.02),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 6),
+
+            SizedBox(height: height * 0.01),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   children: [
                     SizedBox(
-                      height: 20,
-                      width: 20,
+                      height: height * 0.025,
+                      width: height * 0.025,
                       child: Checkbox(
                         value: isChecked,
                         onChanged: (value) {
@@ -179,37 +195,32 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         side: const BorderSide(color: Colors.grey),
                         visualDensity: VisualDensity.compact,
+                        activeColor: AppColor.primary,
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Text(
-                      "remember_me".tr(),
-                      style: AppColor.textgrey,
-                    ),
+                    SizedBox(width: width * 0.02),
+                    Text("remember_me".tr(), style: AppColor.textgrey),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, PageRouteName.forget);
-                    },
-                    child: Text(
-                      "forgot_password?".tr(),
-                      style: AppColor.textprimary.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, PageRouteName.forget);
+                  },
+                  child: Text(
+                    "forgot_password?".tr(),
+                    style: AppColor.textprimary.copyWith(fontWeight: FontWeight.w600),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 14),
+
+            SizedBox(height: height * 0.03),
 
             Center(
               child: SizedBox(
-                width: 360,
-                height: 47,
+                width: width * 0.9,
+                height: height * 0.059,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: isFormValid
@@ -217,7 +228,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         : Colors.grey.shade400,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(width * 0.02),
                     ),
                   ),
                   onPressed: isFormValid
@@ -225,20 +236,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.pushNamed(context, PageRouteName.main);
                   }
                       : null,
-                  child:Text(
+                  child: Text(
                     "login".tr(),
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      fontSize: width * 0.045,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
             ),
-
-
-
-
-
-
-
           ],
         ),
       ),

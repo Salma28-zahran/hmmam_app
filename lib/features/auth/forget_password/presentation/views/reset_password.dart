@@ -17,9 +17,12 @@ class _ResetPasswordState extends State<ResetPassword> {
   bool passwordsMatch = true;
   bool isPasswordVisible2 = false;
 
-
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     bool isFormValid =
         newpasswordController.text.isNotEmpty &&
             confirmpasswordController.text.isNotEmpty &&
@@ -29,23 +32,29 @@ class _ResetPasswordState extends State<ResetPassword> {
       appBar: AppBar(
         title: Text(
           "Reset Password",
-          style: AppColor.appBar,
+          style: AppColor.appBar.copyWith(fontSize: width * 0.05),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 9),
+        padding: EdgeInsets.symmetric(
+          horizontal: width * 0.04,
+          vertical: height * 0.012,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Your new password must be different from\nprevious used passwords.",
-              style: AppColor.textgrey,
+              style: AppColor.textgrey.copyWith(fontSize: width * 0.035),
             ),
-            const SizedBox(height: 15),
+            SizedBox(height: height * 0.02),
 
-            // New password
-            Text("New Password", style: AppColor.textblack),
-            const SizedBox(height: 4),
+            /// New password
+            Text(
+              "New Password",
+              style: AppColor.textblack.copyWith(fontSize: width * 0.04),
+            ),
+            SizedBox(height: height * 0.005),
             TextField(
               controller: newpasswordController,
               onChanged: (_) => setState(() {
@@ -55,13 +64,14 @@ class _ResetPasswordState extends State<ResetPassword> {
               obscureText: !isPasswordVisible,
               decoration: InputDecoration(
                 hintText: "Enter your password",
-                hintStyle: AppColor.textgrey,
+                hintStyle: AppColor.textgrey.copyWith(fontSize: width * 0.035),
                 suffixIcon: IconButton(
                   icon: Icon(
                     isPasswordVisible
                         ? Icons.visibility
                         : Icons.visibility_off,
                     color: Colors.grey,
+                    size: width * 0.055,
                   ),
                   onPressed: () {
                     setState(() {
@@ -69,28 +79,30 @@ class _ResetPasswordState extends State<ResetPassword> {
                     });
                   },
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: EdgeInsets.symmetric(horizontal: width * 0.025),
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(width * 0.02),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(width * 0.02),
                 ),
               ),
             ),
-            const SizedBox(height: 2),
+            SizedBox(height: height * 0.005),
             Text(
               "Password must be at least 8 characters long!",
-              style: AppColor.textgrey.copyWith(fontSize: 12),
+              style: AppColor.textgrey.copyWith(fontSize: width * 0.03),
             ),
+            SizedBox(height: height * 0.02),
 
-            const SizedBox(height: 15),
-
-            // Confirm password
-            Text("Confirm New Password", style: AppColor.textblack),
-            const SizedBox(height: 4),
+            /// Confirm password
+            Text(
+              "Confirm New Password",
+              style: AppColor.textblack.copyWith(fontSize: width * 0.04),
+            ),
+            SizedBox(height: height * 0.005),
             TextField(
               controller: confirmpasswordController,
               onChanged: (_) => setState(() {
@@ -100,13 +112,14 @@ class _ResetPasswordState extends State<ResetPassword> {
               obscureText: !isPasswordVisible2,
               decoration: InputDecoration(
                 hintText: "Enter your password",
-                hintStyle: AppColor.textgrey,
+                hintStyle: AppColor.textgrey.copyWith(fontSize: width * 0.035),
                 suffixIcon: IconButton(
                   icon: Icon(
                     isPasswordVisible2
                         ? Icons.visibility
                         : Icons.visibility_off,
                     color: Colors.grey,
+                    size: width * 0.055,
                   ),
                   onPressed: () {
                     setState(() {
@@ -114,40 +127,40 @@ class _ResetPasswordState extends State<ResetPassword> {
                     });
                   },
                 ),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: EdgeInsets.symmetric(horizontal: width * 0.025),
                 enabledBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(width * 0.02),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(width * 0.02),
                 ),
               ),
             ),
-            const SizedBox(height: 2),
+            SizedBox(height: height * 0.005),
 
             if (!passwordsMatch)
-              const Text(
+              Text(
                 "The password you entered is not the same as the above!",
                 style: TextStyle(
                   color: Colors.red,
-                  fontSize: 12,
+                  fontSize: width * 0.03,
                   fontWeight: FontWeight.w500,
                 ),
               )
             else
               Text(
                 "Both passwords must match",
-                style: AppColor.textgrey.copyWith(fontSize: 12),
+                style: AppColor.textgrey.copyWith(fontSize: width * 0.03),
               ),
 
-            const SizedBox(height: 15),
+            SizedBox(height: height * 0.02),
 
-            // Create new password button
+            /// Create new password button
             SizedBox(
               width: double.infinity,
-              height: 47,
+              height: height * 0.055,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: isFormValid
@@ -155,7 +168,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       : Colors.grey.shade400,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(width * 0.02),
                   ),
                 ),
                 onPressed: isFormValid
@@ -163,10 +176,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                   Navigator.pushNamed(context, PageRouteName.login);
                 }
                     : null,
-                child: const Text(
+                child: Text(
                   "Create New Password",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: width * 0.04,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -178,13 +191,13 @@ class _ResetPasswordState extends State<ResetPassword> {
             Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                padding: const EdgeInsets.only(bottom: 40),
+                padding: EdgeInsets.only(bottom: height * 0.05),
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.black87,
-                      fontSize: 14,
+                      fontSize: width * 0.035,
                     ),
                     children: [
                       const TextSpan(
@@ -193,9 +206,10 @@ class _ResetPasswordState extends State<ResetPassword> {
                       ),
                       TextSpan(
                         text: "try another email",
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.blue,
                           decoration: TextDecoration.underline,
+                          fontSize: width * 0.035,
                         ),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
