@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
 import 'package:hmmam_app/core/route/routes.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
@@ -32,14 +33,10 @@ class _SignupScreenState extends State<SignupScreen> {
   bool isChecked = false;
 
   @override
-  void initState() {
-    super.initState();
-
-
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     bool isFormValid = nameController.text.isNotEmpty &&
         phoneController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
@@ -55,9 +52,9 @@ class _SignupScreenState extends State<SignupScreen> {
           IconButton(
             icon: Text(
               context.locale.languageCode == 'en' ? 'AR' : 'EN',
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 16,
+                fontSize: screenWidth * 0.04,
                 color: Colors.black,
               ),
             ),
@@ -73,28 +70,40 @@ class _SignupScreenState extends State<SignupScreen> {
       ),
 
       body: Padding(
-        padding: const EdgeInsets.only(left: 19, top: 20, right: 19),
+        padding: EdgeInsets.only(
+          left: screenWidth * 0.05,
+          top: screenHeight * 0.025,
+          right: screenWidth * 0.05,
+        ),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "to_get_started_please_fill_out_the_registration_form_below".tr(),
-                style: AppColor.textgrey,
+                style: AppColor.textgrey.copyWith(
+                  fontSize: screenWidth * 0.037,
+                ),
               ),
-              const SizedBox(height: 40),
-              Text("name".tr(), style: AppColor.textblack),
-              const SizedBox(height: 8),
+              SizedBox(height: screenHeight * 0.03),
+              Text("name".tr(),
+                  style: AppColor.textblack.copyWith(
+                    fontSize: screenWidth * 0.042,
+                  )),
+              SizedBox(height: screenHeight * 0.01),
               SizedBox(
-                width: 328,
-                height: 40,
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.055,
                 child: TextField(
                   controller: nameController,
                   onChanged: (_) => setState(() {}),
                   decoration: InputDecoration(
                     hintText: "e.g_vixturistic".tr(),
-                    hintStyle: AppColor.textgrey,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    hintStyle: AppColor.textgrey.copyWith(
+                      fontSize: screenWidth * 0.035,
+                    ),
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: screenWidth * 0.025),
                     enabledBorder: OutlineInputBorder(
                       borderSide: const BorderSide(color: Colors.grey),
                       borderRadius: BorderRadius.circular(8),
@@ -106,32 +115,39 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
-              Text("phone".tr(), style: AppColor.textblack),
-              const SizedBox(height: 8),
+              SizedBox(height: screenHeight * 0.025),
+              Text("phone".tr(),
+                  style: AppColor.textblack.copyWith(
+                    fontSize: screenWidth * 0.042,
+                  )),
+              SizedBox(height: screenHeight * 0.01),
               Row(
                 children: [
                   Container(
-                    width: 90,
-                    height: 40,
+                    width: screenWidth * 0.23,
+                    height: screenHeight * 0.047,
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColor.grey),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    padding:
+                    EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
                         value: selectedCode,
-                        icon: const Icon(Icons.arrow_drop_down, color: AppColor.grey),
+                        icon: const Icon(Icons.arrow_drop_down,
+                            color: AppColor.grey),
                         items: countryCodes.map((code) {
                           final englishCode = code;
-                          final displayCode = context.locale.languageCode == 'ar'
+                          final displayCode =
+                          context.locale.languageCode == 'ar'
                               ? _convertToArabicNumbers(code)
                               : code;
 
                           return DropdownMenuItem(
                             value: englishCode,
-                            child: Text(displayCode, style: const TextStyle(color: AppColor.grey)),
+                            child: Text(displayCode,
+                                style: const TextStyle(color: AppColor.grey)),
                           );
                         }).toList(),
                         onChanged: (value) {
@@ -142,18 +158,22 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: screenWidth * 0.02),
                   Expanded(
                     child: SizedBox(
-                      height: 40,
+                      height: screenHeight * 0.055,
                       child: TextField(
                         controller: phoneController,
                         onChanged: (_) => setState(() {}),
                         keyboardType: TextInputType.phone,
                         decoration: InputDecoration(
                           hintText: 'enter_your_phone_number'.tr(),
-                          hintStyle: const TextStyle(color: Colors.grey),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                          hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontSize: screenWidth * 0.035,
+                          ),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.025),
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(color: Colors.grey),
                             borderRadius: BorderRadius.circular(8),
@@ -168,25 +188,31 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              Text("password".tr(), style: AppColor.textblack),
-              const SizedBox(height: 4),
+              SizedBox(height: screenHeight * 0.015),
+              Text("password".tr(),
+                  style: AppColor.textblack.copyWith(
+                    fontSize: screenWidth * 0.042,
+                  )),
+              SizedBox(height: screenHeight * 0.005),
               SizedBox(
-                width: 328,
-                height: 40,
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.055,
                 child: TextField(
                   controller: passwordController,
                   onChanged: (_) => setState(() {}),
                   obscureText: !isPasswordVisible,
                   decoration: InputDecoration(
                     hintText: "enter_your_password".tr(),
-                    hintStyle: AppColor.textgrey,
+                    hintStyle: AppColor.textgrey.copyWith(
+                      fontSize: screenWidth * 0.035,
+                    ),
                     suffixIcon: IconButton(
                       icon: Icon(
                         isPasswordVisible
                             ? Icons.visibility
                             : Icons.visibility_off,
                         color: Colors.grey,
+                        size: screenWidth * 0.05,
                       ),
                       onPressed: () {
                         setState(() {
@@ -194,7 +220,8 @@ class _SignupScreenState extends State<SignupScreen> {
                         });
                       },
                     ),
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: screenWidth * 0.025),
                     enabledBorder: OutlineInputBorder(
                       borderSide: const BorderSide(color: Colors.grey),
                       borderRadius: BorderRadius.circular(8),
@@ -206,12 +233,14 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 2),
+              SizedBox(height: screenHeight * 0.005),
               Text(
                 "password_must_be_at_least_8_characters_long!".tr(),
-                style: AppColor.textgrey.copyWith(fontSize: 12),
+                style: AppColor.textgrey.copyWith(
+                  fontSize: screenWidth * 0.032,
+                ),
               ),
-              const SizedBox(height: 27),
+              SizedBox(height: screenHeight * 0.035),
 
               Row(
                 children: [
@@ -223,23 +252,34 @@ class _SignupScreenState extends State<SignupScreen> {
                       });
                     },
                     activeColor: AppColor.primary,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
                     side: const BorderSide(color: Colors.grey),
                   ),
                   Expanded(
                     child: RichText(
                       text: TextSpan(
-                        text: "by_clicking_\"register,\"_you_agree_to_our".tr(),
-                        style: const TextStyle(color: Colors.black87, fontSize: 14),
+                        text:
+                        "by_clicking_\"register,\"_you_agree_to_our".tr(),
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: screenWidth * 0.035,
+                        ),
                         children: [
                           TextSpan(
                             text: 'terms_and_conditions'.tr(),
-                            style: const TextStyle(color: AppColor.primary),
+                            style: TextStyle(
+                              color: AppColor.primary,
+                              fontSize: screenWidth * 0.035,
+                            ),
                           ),
                           TextSpan(text: 'and'.tr()),
                           TextSpan(
                             text: 'privacy_policy'.tr(),
-                            style: const TextStyle(color: AppColor.primary),
+                            style: TextStyle(
+                              color: AppColor.primary,
+                              fontSize: screenWidth * 0.035,
+                            ),
                           ),
                         ],
                       ),
@@ -248,12 +288,12 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
 
-              const SizedBox(height: 14),
+              SizedBox(height: screenHeight * 0.02),
 
               Center(
                 child: SizedBox(
-                  width: 328,
-                  height: 47,
+                  width: screenWidth * 0.9,
+                  height: screenHeight * 0.050,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isFormValid
@@ -271,38 +311,147 @@ class _SignupScreenState extends State<SignupScreen> {
                         : null,
                     child: Text(
                       "register".tr(),
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: screenWidth * 0.04,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
               ),
 
-              const SizedBox(height: 14),
+              SizedBox(height: screenHeight * 0.02),
               Divider(thickness: 0.4, color: AppColor.grey),
-              const SizedBox(height: 8),
+              SizedBox(height: screenHeight * 0.015),
               Center(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image.asset(AssetsManager.facebook),
-                    const SizedBox(width: 10),
-                    Image.asset(AssetsManager.google),
-                    const SizedBox(width: 10),
-                    Image.asset(AssetsManager.apple),
+                    Image.asset(AssetsManager.facebook,
+                        width: screenWidth * 0.08),
+                    SizedBox(width: screenWidth * 0.03),
+                    GestureDetector(
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              title: Column(
+                                children: [
+                                  const Icon(
+                                    FontAwesomeIcons.google,
+                                    size: 30,
+                                  ),
+                                  SizedBox(height: screenHeight * 0.008),
+                                  Text('choose_an_account'.tr()),
+                                ],
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text('to_continue_to_travel_app'.tr()),
+                                  SizedBox(height: screenHeight * 0.02),
+                                  ListTile(
+                                    leading: const CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                          'assets/images/user1.png'),
+                                    ),
+                                    title: const Text('Vixturistic'),
+                                    subtitle:
+                                    const Text('info.studio@gmail.com'),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  ListTile(
+                                    leading: const CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                          'assets/images/user1.png'),
+                                    ),
+                                    title: const Text('Vixturistic'),
+                                    subtitle:
+                                    const Text('info.studio@gmail.com'),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  const Divider(),
+                                  ListTile(
+                                    leading: const Icon(Icons.add),
+                                    title: Text('add_another_account'.tr()),
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                  const Divider(),
+                                  RichText(
+                                    textAlign: TextAlign.start,
+                                    text: TextSpan(
+                                      style: AppColor.textgrey.copyWith(
+                                          fontSize: screenWidth * 0.032),
+                                      children: [
+                                        TextSpan(
+                                          text: 'google_share_message'.tr(),
+                                        ),
+                                        TextSpan(
+                                          text: 'privacy_policy'.tr(),
+                                          style: const TextStyle(
+                                            color: AppColor.primary,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {},
+                                        ),
+                                        TextSpan(
+                                          text: 'and'.tr(),
+                                        ),
+                                        TextSpan(
+                                          text: 'terms_of_service'.tr(),
+                                          style: const TextStyle(
+                                            color: AppColor.primary,
+                                          ),
+                                          recognizer: TapGestureRecognizer()
+                                            ..onTap = () {},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Image.asset(
+                        AssetsManager.google,
+                        height: screenHeight * 0.06,
+                      ),
+                    ),
+                    SizedBox(width: screenWidth * 0.03),
+                    Image.asset(AssetsManager.apple,
+                        width: screenWidth * 0.08),
                   ],
                 ),
               ),
-              const SizedBox(height: 110),
+              SizedBox(height: screenHeight * 0.15),
               Center(
                 child: RichText(
                   text: TextSpan(
                     text: 'have_you_an_account?'.tr(),
-                    style: const TextStyle(color: Colors.black87, fontSize: 15),
+                    style: TextStyle(
+                        color: Colors.black87,
+                        fontSize: screenWidth * 0.038),
                     children: [
                       TextSpan(
                         text: 'login'.tr(),
-                        style: const TextStyle(color: AppColor.primary, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          color: AppColor.primary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: screenWidth * 0.038,
+                        ),
                         recognizer: TapGestureRecognizer()..onTap = () {},
                       ),
                     ],

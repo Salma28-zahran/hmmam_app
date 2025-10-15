@@ -45,6 +45,10 @@ class _ActivateScreenState extends State<ActivateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final width = size.width;
+    final height = size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -71,8 +75,9 @@ class _ActivateScreenState extends State<ActivateScreen> {
           ),
         ],
       ),
+
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40.0),
+        padding: EdgeInsets.symmetric(horizontal: width * 0.1),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +88,7 @@ class _ActivateScreenState extends State<ActivateScreen> {
                 textAlign: TextAlign.center,
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.04),
 
               // PIN input fields
               PinCodeTextField(
@@ -91,16 +96,25 @@ class _ActivateScreenState extends State<ActivateScreen> {
                 length: 4,
                 controller: otpController,
                 keyboardType: TextInputType.number,
-                textStyle: const TextStyle(fontSize: 20, color: AppColor.black),
+                textStyle: TextStyle(fontSize: width * 0.05, color: AppColor.black),
                 pinTheme: PinTheme(
                   shape: PinCodeFieldShape.box,
-                  borderRadius: BorderRadius.circular(8),
-                  fieldHeight: 55,
-                  fieldWidth: 55,
+                  borderRadius: BorderRadius.circular(width * 0.03),
+                  fieldHeight: height * 0.07,
+                  fieldWidth: width * 0.12,
                   inactiveColor: AppColor.grey,
                   activeColor: AppColor.primary,
-                  selectedColor: AppColor.grey,
+                  selectedColor: AppColor.primary.withOpacity(0.7),
+                  borderWidth: 1.2,
+
+                  fieldOuterPadding: EdgeInsets.symmetric(horizontal: width * 0.02),
                 ),
+                cursorColor: AppColor.primary,
+                animationType: AnimationType.fade,
+                animationDuration: const Duration(milliseconds: 200),
+                mainAxisAlignment: MainAxisAlignment.center,
+                beforeTextPaste: (text) => true,
+                pastedTextStyle: const TextStyle(color: AppColor.primary),
                 onChanged: (value) {
                   setState(() {
                     isButtonActive = value.length == 4;
@@ -108,61 +122,70 @@ class _ActivateScreenState extends State<ActivateScreen> {
                 },
               ),
 
-              const SizedBox(height: 16),
+
+
+              SizedBox(height: height * 0.02),
 
               // Timer
               Text(
                 "00:${secondsRemaining.toString().padLeft(2, '0')}",
-                style: const TextStyle(
+                style: TextStyle(
                   color: AppColor.black,
-                  fontSize: 16,
+                  fontSize: width * 0.045,
                   fontWeight: FontWeight.w500,
                 ),
               ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: height * 0.015),
 
               // Resend text
               RichText(
                 text: TextSpan(
                   text: "didn't_receive_the_code?".tr(),
-                  style: const TextStyle(color: AppColor.black, fontSize: 14),
+                  style: TextStyle(
+                    color: AppColor.black,
+                    fontSize: width * 0.04,
+                  ),
                   children: [
                     TextSpan(
                       text: " ${"resend.".tr()}",
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: AppColor.primary,
                         fontWeight: FontWeight.w600,
+                        fontSize: width * 0.04,
                       ),
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.05),
 
               // Verify button
-              ElevatedButton(
-                onPressed: isButtonActive
-                    ? () {
-                  Navigator.pushNamed(context, PageRouteName.login);
-                }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size(double.infinity, 50),
-                  backgroundColor:
-                  isButtonActive ? AppColor.primary : AppColor.grey,
-                  foregroundColor: AppColor.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+              SizedBox(
+                width: double.infinity,
+                height: height * 0.065,
+                child: ElevatedButton(
+                  onPressed: isButtonActive
+                      ? () {
+                    Navigator.pushNamed(context, PageRouteName.login);
+                  }
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor:
+                    isButtonActive ? AppColor.primary : AppColor.grey,
+                    foregroundColor: AppColor.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(width * 0.02),
+                    ),
+                    elevation: 0,
                   ),
-                  elevation: 0,
-                ),
-                child: Text(
-                  "verify".tr(),
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                  child: Text(
+                    "verify".tr(),
+                    style: TextStyle(
+                      fontSize: width * 0.045,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),

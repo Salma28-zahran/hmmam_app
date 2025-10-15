@@ -39,8 +39,8 @@
 
   "electric": "Electric",
   "non_electric": "Non Electric",
-  "selected": "Selected ",
-  "wheelchair": "Wheelchair ",
+  "selected": "Selected  ",
+  "wheelchair": "  Wheelchair ",
   "battery%": "Battery%",
   "range": "Range",
   "100":"100",
@@ -106,6 +106,15 @@
   "notifications": "Notifications",
   "no_notifications_yet": "No Notifications Yet",
 
-  "all_notifications_text": "All notifications we send will appear here,\nso you can view them easily anytime."
+  "all_notifications_text": "All notifications we send will appear here,\nso you can view them easily anytime.",
+
+
+  "to_continue_to_travel_app": "to continue to Travel App",
+  "choose_an_account": "Choose an account",
+  "add_another_account": "Add another account",
+  "google_share_message": "To continue, Google will share your name, email address and profile picture with Travel app account. Before using this app, review its ",
+  "terms_of_service": "Terms of Service"
+
+
 
 }
