@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
+import 'package:hmmam_app/features/home/presentation/widgets/PopupWidget.dart';
 import 'package:hmmam_app/features/home/presentation/widgets/SelectableTagsRow.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -305,7 +306,16 @@ class Nonelectrictabcontent extends StatelessWidget {
                       borderRadius: BorderRadius.circular(25),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => const PopupWidget(),
+                    );
+                  },
+
+
                   icon: const Icon(Icons.power_settings_new,
                       color: Colors.white, size: 20),
                   label: Text(
