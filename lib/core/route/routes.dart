@@ -11,6 +11,8 @@ class PageRouteName{
   static const String directions = '/directions';
   static const String notifications = '/notifications';
   static const String details = '/details';
+  static const String payment = '/payment';
+
 
 
 

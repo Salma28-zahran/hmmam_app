@@ -41,6 +41,7 @@ dependencies:
   easy_localization: ^3.0.8
   flutter_native_splash: ^2.4.6
   flutter_screenutil: ^5.9.3
+  audioplayers: ^6.5.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +69,7 @@ flutter:
   assets:
     - assets/images/png/
     - assets/translations/
+    - assets/sounds
 
   #   - images/a_dot_ham.jpeg
 
