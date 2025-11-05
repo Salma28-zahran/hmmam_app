@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
+import 'package:hmmam_app/core/route/routes.dart';
+import 'package:hmmam_app/features/home/presentation/widgets/wheelchair_detail_args.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
 
 class WheelchairDetail extends StatelessWidget {
@@ -260,7 +262,23 @@ class WheelchairDetail extends StatelessWidget {
                     width: w,
                     height: h * 0.065,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                          context,
+                          PageRouteName.payment,
+                          arguments: WheelchairDetailArgs(
+                            cityName: cityName,
+                            airport: airport,
+                            terminalGate: terminalGate,
+                            date: date,
+                            time: time,
+                            passengerName: passengerName,
+                            wheelchairType: wheelchairType,
+                            seatType: seatType,
+                            totalPrice: totalPrice,
+                          ),
+                        );
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColor.primary,
                         foregroundColor: Colors.white,
