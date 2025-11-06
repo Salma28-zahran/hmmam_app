@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
-import 'package:hmmam_app/features/home/presentation/views/wheelchair_detail.dart';
 import 'package:hmmam_app/features/home/presentation/widgets/wheelchair_detail_args.dart';
 import 'package:hmmam_app/features/payment/presentation/widgets/WheelchairDetailPopup.dart';
 import 'package:hmmam_app/features/payment/presentation/widgets/booking_steps_indicator.dart';
@@ -17,7 +16,7 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  static const int _startTime = 600; // 10 دقائق = 600 ثانية
+  static const int _startTime = 600;
   late int _remainingSeconds;
   Timer? _timer;
 
@@ -64,6 +63,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
         .width;
 
     return Scaffold(
+      backgroundColor: AppColor.white,
       body: Column(
         children: [
           Stack(
@@ -109,8 +109,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
             child: const Center(child: BookingStepsIndicator(currentStep: 2)),
           ),
           const SizedBox(height: 15),
+          /////container 1///////
           Container(
-            height: 150,
+            //height: 150,
             width: 380,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -212,33 +213,121 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.all(2),
-                  child: Container(
-                    height: 150,
-                    width: 380,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.1),
-                          spreadRadius: 1,
-                          blurRadius: 6,
-                          offset: const Offset(0, 2),
+
+              ],
+            ),
+          ),
+          SizedBox(height: 18,),
+          //////container 2//////
+          Padding(
+            padding: const EdgeInsets.all(2),
+            child: Container(
+              height: 120,
+              width: 380,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Payment Method", style: AppColor.textblack,)),
+                  ),
+                  SizedBox(height: 10,),
+
+                  SizedBox(
+                    width: 300,
+                    height: 40,
+                    child:
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.primary,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6)),
+                      ),
+                      child: Text("Select Payment Method", style: TextStyle(
+                          fontSize: w * 0.045, fontWeight: FontWeight.w600)),
+                    ),
+                  ),
+                ],
+              ),),
+          ),
+          SizedBox(height: 18,),
+          ///////container 3//////
+          Container(
+            width: 420,
+            padding: const EdgeInsets.all(16),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.15),
+                  spreadRadius: 1,
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "You Can Save More!",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Container(
+                  height: 55,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.grey.withOpacity(0.3)),
+                    color: Colors.white,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      children: [
+                       Image.asset(AssetsManager.green),
+                        const SizedBox(width: 10),
+                        const Expanded(
+                          child: Text(
+                            "Apply promo/voucher code",
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ),
+                        const Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: Colors.black45,
+                          size: 22,
                         ),
                       ],
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text("Payment Method",style: AppColor.textblack,)
-                      ],
-                    ),),
-                )
-
-
+                  ),
+                ),
               ],
             ),
           ),

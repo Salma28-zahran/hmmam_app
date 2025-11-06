@@ -124,8 +124,8 @@ class RoutesGenerator {
 
       default:
         return MaterialPageRoute(
-        // builder: (context) => OnBoarding(),
-          builder: (context)=> MainScreen(),
+         builder: (context) => OnBoarding(),
+         // builder: (context)=> MainScreen(),
           settings: settings,
         );
     }
