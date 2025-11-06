@@ -261,7 +261,8 @@ class WheelchairDetail extends StatelessWidget {
                   SizedBox(
                     width: w,
                     height: h * 0.065,
-                    child: ElevatedButton(
+                    child:
+                    ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(
                           context,
