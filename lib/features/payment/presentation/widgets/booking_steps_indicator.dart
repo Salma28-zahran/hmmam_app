@@ -16,10 +16,12 @@ class _BookingStepsIndicatorState extends State<BookingStepsIndicator> {
   @override
   void didUpdateWidget(covariant BookingStepsIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // لما تتغير الخطوة (يعني خلصت خطوة جديدة) يشغل الصوت
     if (widget.currentStep != oldWidget.currentStep &&
         widget.currentStep > oldWidget.currentStep) {
-      player.play(AssetSource('sounds/success.mp3'));
+      player.play(
+        AssetSource('sounds/zapsplat_multimedia_alert_bell_chime_event_notification_001_57852.mp3'),
+      );
+
     }
   }
 
@@ -33,33 +35,38 @@ class _BookingStepsIndicatorState extends State<BookingStepsIndicator> {
 
     return Row(
       children: [
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 400),
-          width: 28,
-          height: 28,
-          decoration: BoxDecoration(
-            color: circleColor,
-            shape: BoxShape.circle,
-          ),
-          child: Center(
-            child: AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, anim) =>
-                  ScaleTransition(scale: anim, child: child),
-              child: isCompleted
-                  ? const Icon(
-                Icons.check,
-                key: ValueKey('check'),
-                color: Colors.white,
-                size: 18,
-              )
-                  : Text(
-                number,
-                key: ValueKey('number'),
-                style: const TextStyle(
+        AnimatedScale(
+          duration: const Duration(milliseconds: 300),
+          scale: isCompleted ? 1.1 : 1.0,
+          curve: Curves.easeOutBack,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 400),
+            width: 28,
+            height: 28,
+            decoration: BoxDecoration(
+              color: circleColor,
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                transitionBuilder: (child, anim) =>
+                    ScaleTransition(scale: anim, child: child),
+                child: isCompleted
+                    ? const Icon(
+                  Icons.check,
+                  key: ValueKey('check'),
                   color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
+                  size: 18,
+                )
+                    : Text(
+                  number,
+                  key: ValueKey('number'),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),
@@ -77,6 +84,7 @@ class _BookingStepsIndicatorState extends State<BookingStepsIndicator> {
       ],
     );
   }
+
 
   Widget _buildDivider(int step) {
     final isActive = widget.currentStep > step;

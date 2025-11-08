@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hmmam_app/core/resources/app_assets_manager.dart';
+import 'package:hmmam_app/core/route/routes.dart';
 import 'package:hmmam_app/features/home/presentation/widgets/wheelchair_detail_args.dart';
+import 'package:hmmam_app/features/payment/presentation/widgets/PromoVoucherWidget.dart';
 import 'package:hmmam_app/features/payment/presentation/widgets/WheelchairDetailPopup.dart';
 import 'package:hmmam_app/features/payment/presentation/widgets/booking_steps_indicator.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
@@ -19,6 +21,14 @@ class _PaymentScreenState extends State<PaymentScreen> {
   static const int _startTime = 600;
   late int _remainingSeconds;
   Timer? _timer;
+  int currentStep = 2;
+
+
+  // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+  // المتغير اللي هيخزن وسيلة الدفع المختارة
+  String? selectedMethod;
+  String? selectedImage;
+  // ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
 
   @override
   void initState() {
@@ -51,16 +61,25 @@ class _PaymentScreenState extends State<PaymentScreen> {
     super.dispose();
   }
 
+  Future<void> _navigateAndSelectMethod(BuildContext context) async {
+    final result = await Navigator.pushNamed(context, PageRouteName.method);
+    if (result is Map<String, String>) {
+      setState(() {
+        selectedMethod = result['title'];
+        selectedImage = result['asset'];
+        setState(() {
+          currentStep = 3; // مثلاً لما يختار طريقة الدفع
+        });
+// ✅ ننتقل للخطوة الثالثة بعد اختيار طريقة الدفع
+      });
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery
-        .of(context)
-        .size
-        .height;
-    double w = MediaQuery
-        .of(context)
-        .size
-        .width;
+    double h = MediaQuery.of(context).size.height;
+    double w = MediaQuery.of(context).size.width;
 
     return Scaffold(
       backgroundColor: AppColor.white,
@@ -106,12 +125,12 @@ class _PaymentScreenState extends State<PaymentScreen> {
           const SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.only(left: 18, right: 18),
-            child: const Center(child: BookingStepsIndicator(currentStep: 2)),
+            child: Center(child: BookingStepsIndicator(currentStep: currentStep)),
+
           ),
           const SizedBox(height: 15),
           /////container 1///////
           Container(
-            //height: 150,
             width: 380,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -153,7 +172,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ),
                     ],
                   ),
-
                 ),
                 Padding(
                   padding: const EdgeInsets.all(16),
@@ -213,11 +231,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ],
                   ),
                 ),
-
               ],
             ),
           ),
-          SizedBox(height: 18,),
+          const SizedBox(height: 18),
+
           //////container 2//////
           Padding(
             padding: const EdgeInsets.all(2),
@@ -236,7 +254,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ),
                 ],
               ),
-              child: Column(
+              child: selectedMethod == null
+                  ? Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
@@ -244,93 +263,101 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Payment Method", style: AppColor.textblack,)),
+                          "Payment Method",
+                          style: AppColor.textblack,
+                        )),
                   ),
-                  SizedBox(height: 10,),
-
+                  const SizedBox(height: 10),
                   SizedBox(
                     width: 300,
                     height: 40,
-                    child:
-                    ElevatedButton(
-                      onPressed: () {},
+                    child: ElevatedButton(
+                      onPressed: () => _navigateAndSelectMethod(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColor.primary,
                         foregroundColor: Colors.white,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6)),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
                       ),
-                      child: Text("Select Payment Method", style: TextStyle(
-                          fontSize: w * 0.045, fontWeight: FontWeight.w600)),
+                      child: Text(
+                        "Select Payment Method",
+                        style: TextStyle(
+                            fontSize: w * 0.045,
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 ],
-              ),),
-          ),
-          SizedBox(height: 18,),
-          ///////container 3//////
-          Container(
-            width: 420,
-            padding: const EdgeInsets.all(16),
-            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.15),
-                  spreadRadius: 1,
-                  blurRadius: 8,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "You Can Save More!",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  height: 55,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                    color: Colors.white,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
+              )
+                  : Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16, vertical: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                       Image.asset(AssetsManager.green),
-                        const SizedBox(width: 10),
-                        const Expanded(
-                          child: Text(
-                            "Apply promo/voucher code",
+                        Text(
+                          "Payment Method",
+                          style: AppColor.textblack.copyWith(
+                              fontWeight: FontWeight.bold),
+                        ),
+                        GestureDetector(
+                          onTap: () => _navigateAndSelectMethod(context),
+                          child: const Text(
+                            "Change",
                             style: TextStyle(
-                              color: Colors.black54,
-                              fontSize: 14,
+                              color: Colors.blue,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
-                        const Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          color: Colors.black45,
-                          size: 22,
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Container(
+                          width: 56,
+                          height: 40,
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.04),
+                                blurRadius: 6,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: Image.asset(
+                            selectedImage ?? '',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Text(
+                          selectedMethod ?? '',
+                          style: AppColor.textblack.copyWith(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
+          const SizedBox(height: 8),
+
+          ///////container 3//////
+         const PromoVoucherWidget(),
         ],
       ),
     );

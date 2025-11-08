@@ -22,6 +22,20 @@ abstract class AssetsManager {
   static const String notifications_image = "assets/images/png/notifications_image.png";
   static const String logo2 = "assets/images/png/logo2.png";
   static const String green = "assets/images/png/green.png";
+  static const String mandiri = "assets/images/png/mandiri.png";
+  static const String bca = "assets/images/png/bca.png";
+  static const String bni = "assets/images/png/bni.png";
+  static const String orange = "assets/images/png/orange.jpeg";
+  static const String vodafone = "assets/images/png/vodafone.jpeg";
+  static const String etisalat = "assets/images/png/etisalat.jpeg";
+
+
+
+
+
+
+
+
 
 
 

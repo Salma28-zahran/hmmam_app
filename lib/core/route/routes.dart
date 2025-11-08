@@ -12,6 +12,9 @@ class PageRouteName{
   static const String notifications = '/notifications';
   static const String details = '/details';
   static const String payment = '/payment';
+  static const String method = '/method';
+
+
 
 
 
