@@ -15,6 +15,7 @@ import 'package:hmmam_app/features/main/presentation/views/main_screen.dart';
 import 'package:hmmam_app/features/notifications/presentation/views/notifications_screen.dart';
 import 'package:hmmam_app/features/onboarding/OnBoarding.dart';
 import 'package:hmmam_app/features/orders/presentation/views/orders_screen.dart';
+import 'package:hmmam_app/features/payment/presentation/views/payment_method.dart';
 import 'package:hmmam_app/features/payment/presentation/views/payment_screen.dart';
 import 'package:hmmam_app/features/saved/presentation/views/saved_screen.dart';
 
@@ -116,6 +117,11 @@ class RoutesGenerator {
           builder: (context) => PaymentScreen(args: args),
           settings: settings,
         );
+      case PageRouteName.method:
+        return MaterialPageRoute(
+          builder: (context) => const PaymentMethod(),
+          settings: settings,
+        );
 
 
 
@@ -124,8 +130,8 @@ class RoutesGenerator {
 
       default:
         return MaterialPageRoute(
-         builder: (context) => OnBoarding(),
-         // builder: (context)=> MainScreen(),
+         //builder: (context) => OnBoarding(),
+          builder: (context)=> MainScreen(),
           settings: settings,
         );
     }
