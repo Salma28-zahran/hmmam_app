@@ -17,6 +17,7 @@ import 'package:hmmam_app/features/onboarding/OnBoarding.dart';
 import 'package:hmmam_app/features/orders/presentation/views/orders_screen.dart';
 import 'package:hmmam_app/features/payment/presentation/views/payment_method.dart';
 import 'package:hmmam_app/features/payment/presentation/views/payment_screen.dart';
+import 'package:hmmam_app/features/payment/presentation/views/ticket_screen.dart';
 import 'package:hmmam_app/features/saved/presentation/views/saved_screen.dart';
 
 import '../../features/home/presentation/widgets/wheelchair_detail_args.dart';
@@ -123,7 +124,11 @@ class RoutesGenerator {
           settings: settings,
         );
 
-
+      case PageRouteName.ticket:
+        return MaterialPageRoute(
+          builder: (context) => const TicketScreen(),
+          settings: settings,
+        );
 
 
 

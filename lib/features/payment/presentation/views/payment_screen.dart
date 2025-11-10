@@ -358,6 +358,60 @@ class _PaymentScreenState extends State<PaymentScreen> {
 
           ///////container 3//////
          const PromoVoucherWidget(),
+
+          const Spacer(),
+
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: w * 0.05, vertical: h * 0.02,),
+            child: Container(
+              width: w,
+              padding: EdgeInsets.all(w * 0.03),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.1),
+                    spreadRadius: 1,
+                    blurRadius: 6,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Total Price", style: AppColor.textblack),
+                      Text(
+                        "Rp920.000",
+                        style: TextStyle(fontSize: w * 0.04, fontWeight: FontWeight.w600, color: Colors.red),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: h * 0.02),
+                  SizedBox(
+                    width: w,
+                    height: h * 0.065,
+                    child:
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context,
+                        PageRouteName.ticket);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColor.primary,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
+                      child: Text("Submit", style: TextStyle(fontSize: w * 0.045, fontWeight: FontWeight.w600)),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );
