@@ -398,7 +398,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ElevatedButton(
                       onPressed: () {
                         Navigator.pushNamed(context,
-                        PageRouteName.ticket);
+                        PageRouteName.ticket,
+                          arguments: widget.args,);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColor.primary,

@@ -125,8 +125,9 @@ class RoutesGenerator {
         );
 
       case PageRouteName.ticket:
+        final args = settings.arguments as WheelchairDetailArgs;
         return MaterialPageRoute(
-          builder: (context) => const TicketScreen(),
+          builder: (context) =>  TicketScreen(args: args,),
           settings: settings,
         );
 

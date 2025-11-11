@@ -28,6 +28,10 @@ abstract class AssetsManager {
   static const String orange = "assets/images/png/orange.jpeg";
   static const String vodafone = "assets/images/png/vodafone.jpeg";
   static const String etisalat = "assets/images/png/etisalat.jpeg";
+  static const String ticket = "assets/images/png/ticket logo.png";
+  static const String fordable = "assets/images/png/fordable.png";
+  static const String video = "assets/images/png/video.png";
+  static const String qrcode = "assets/images/png/QRcode.png";
 
 
 
