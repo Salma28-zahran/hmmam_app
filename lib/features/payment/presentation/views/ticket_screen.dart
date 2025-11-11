@@ -5,6 +5,7 @@ import 'package:hmmam_app/core/route/routes.dart';
 import 'package:hmmam_app/theme/app_theme.dart';
 
 import '../../../home/presentation/widgets/wheelchair_detail_args.dart';
+import '../widgets/ticket_clipper.dart';
 
 class TicketScreen extends StatefulWidget {
   final WheelchairDetailArgs args;
@@ -66,210 +67,219 @@ class _TicketScreenState extends State<TicketScreen> {
                 top: h * 0.11,
                 left: 20,
                 right: 20,
-                child: Container(
-                  height: h * 0.75,
-                  decoration: BoxDecoration(
-                    color: AppColor.white,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: Offset(0, 4),
-                      ),
-                    ],
-                  ),
-
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                          top: 20,
-                          right: 20,
-                          left: 20,
-                          bottom: 8,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [Image.asset(AssetsManager.ticket)],
-                        ),
-                      ),
-                      Divider(
-                        color: Colors.grey.shade300,
-                        thickness: 2,
-                        indent: 15,
-                        endIndent: 15,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.args.cityName,
-                                  style: TextStyle(
-                                    fontSize: w * 0.045,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
-                                Text(
-                                  widget.args.terminalGate,
-                                  style: TextStyle(
-                                    fontSize: w * 0.035,
-                                    color: Colors.black54,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: h * 0.02),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: SizedBox(
-                          height: 3, // ارتفاع الخط
-                          child: LayoutBuilder(
-                            builder: (context, constraints) {
-                              final boxWidth = 6.0;
-                              final dashWidth = 4.0;
-                              final dashCount =
-                                  (constraints.maxWidth /
-                                          (boxWidth + dashWidth))
-                                      .floor();
-
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: List.generate(dashCount, (_) {
-                                  return Container(
-                                    width: boxWidth,
-                                    height: 1,
-                                    color: AppColor.black,
-                                  );
-                                }),
-                              );
-                            },
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    // الـ shadow من تحت
+                    Container(
+                      height: h * 0.75,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.15),
+                            blurRadius: 12,
+                            offset: Offset(0, 6),
                           ),
-                        ),
+                        ],
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      SizedBox(height: h * 0.02),
-                      Padding(
-                        padding: EdgeInsets.all(25),
-                        child: Row(
+                    ),
+
+                    // الـ container الأساسي بعد التقطيع
+                    ClipPath(
+                      clipper: TicketClipper(),
+                      child: Container(
+                        height: h * 0.75,
+                        decoration: BoxDecoration(
+                          color: AppColor.white,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Image.asset(AssetsManager.none, height: 73),
-                            SizedBox(width: 6),
+                            Padding(
+                              padding: EdgeInsets.only(top: 20, right: 20, left: 20, bottom: 8),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [Image.asset(AssetsManager.ticket)],
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey.shade300,
+                              thickness: 2,
+                              indent: 15,
+                              endIndent: 15,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        widget.args.cityName,
+                                        style: TextStyle(
+                                          fontSize: w * 0.045,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      Text(
+                                        widget.args.terminalGate,
+                                        style: TextStyle(
+                                          fontSize: w * 0.035,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: h * 0.02),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: SizedBox(
+                                height: 3,
+                                child: LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    final boxWidth = 6.0;
+                                    final dashWidth = 4.0;
+                                    final dashCount =
+                                    (constraints.maxWidth / (boxWidth + dashWidth)).floor();
+
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: List.generate(dashCount, (_) {
+                                        return Container(
+                                          width: boxWidth,
+                                          height: 1,
+                                          color: AppColor.black,
+                                        );
+                                      }),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: h * 0.02),
+                            Padding(
+                              padding: EdgeInsets.all(25),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Image.asset(AssetsManager.none, height: 73),
+                                  SizedBox(width: 6),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Ahmed",
+                                        style: TextStyle(
+                                          fontSize: w * 0.045,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                      Text(
+                                        "Mobility Assistance",
+                                        style: TextStyle(
+                                          fontSize: w * 0.035,
+                                          color: Colors.black54,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey.shade300,
+                              thickness: 2,
+                              indent: w * 0.054,
+                              endIndent: w * 0.20,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 10, left: 25),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.asset(AssetsManager.fordable),
+                                      SizedBox(width: w * 0.025),
+                                      Text(
+                                        "Fordable",
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: w * 0.037,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: h * 0.015),
+                                  Row(
+                                    children: [
+                                      Image.asset(AssetsManager.video),
+                                      SizedBox(width: w * 0.025),
+                                      Text(
+                                        "Wide Seat",
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: w * 0.037,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: h * 0.04),
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: SizedBox(
+                                height: 3,
+                                child: LayoutBuilder(
+                                  builder: (context, constraints) {
+                                    final boxWidth = 6.0;
+                                    final dashWidth = 4.0;
+                                    final dashCount =
+                                    (constraints.maxWidth / (boxWidth + dashWidth)).floor();
+
+                                    return Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: List.generate(dashCount, (_) {
+                                        return Container(
+                                          width: boxWidth,
+                                          height: 1,
+                                          color: AppColor.black,
+                                        );
+                                      }),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: h * 0.025),
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                Image.asset(AssetsManager.qrcode),
                                 Text(
-                                  "Ahmed",
+                                  "Scan Here",
                                   style: TextStyle(
-                                    fontSize: w * 0.045,
+                                    fontSize: w * 0.040,
                                     fontWeight: FontWeight.w700,
                                   ),
-                                ),
-                                Text(
-                                  "Mobility Assistance",
-                                  style: TextStyle(
-                                    fontSize: w * 0.035,
-                                    color: Colors.black54,
-                                  ),
-                                ),
+                                )
                               ],
                             ),
                           ],
                         ),
                       ),
-                      Divider(
-                        color: Colors.grey.shade300,
-                        thickness: 2,
-                        indent: w * 0.054,
-                        endIndent: w * 0.20,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 10, left: 25),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Image.asset(AssetsManager.fordable),
-                                SizedBox(width: w * 0.025),
-                                Text(
-                                  "Fordable",
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: w * 0.037,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: h * 0.015),
-                            Row(
-                              children: [
-                                Image.asset(AssetsManager.video),
-                                SizedBox(width: w * 0.025),
-                                Text(
-                                  "Wide Seat",
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: w * 0.037,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: h * 0.04),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
-                        child: SizedBox(
-                          height: 3, // ارتفاع الخط
-                          child: LayoutBuilder(
-                            builder: (context, constraints) {
-                              final boxWidth = 6.0;
-                              final dashWidth = 4.0;
-                              final dashCount =
-                                  (constraints.maxWidth /
-                                          (boxWidth + dashWidth))
-                                      .floor();
-
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: List.generate(dashCount, (_) {
-                                  return Container(
-                                    width: boxWidth,
-                                    height: 1,
-                                    color: AppColor.black,
-                                  );
-                                }),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: h * 0.02,),
-                      Column(children: [
-                        Image.asset(AssetsManager.qrcode),
-                        Text("Scan Here" ,
-                          style: TextStyle(
-                            fontSize: w * 0.040,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        )
-                      ]),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ],
