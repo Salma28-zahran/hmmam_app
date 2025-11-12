@@ -27,6 +27,7 @@ class CheckEmail extends StatelessWidget {
                   height: height * 0.22,
                   fit: BoxFit.contain,
                 ),
+                ///////
                 SizedBox(height: height * 0.025),
 
                 Text(
